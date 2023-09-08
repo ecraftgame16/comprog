@@ -100,5 +100,5 @@ print(subtract(4,2))
 #or
 diffrence = subtract (5,3)
 
-#simple data type charater string integer float double boolean
+#simple data type, charater string, integer, float, boolean
 #complex data type enumeration, array, list, object
