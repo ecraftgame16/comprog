@@ -101,4 +101,4 @@ print(subtract(4,2))
 diffrence = subtract (5,3)
 
 #simple data type, charater string, integer, float, boolean
-#complex data type enumeration, array, list, libary
+#complex data type enumeration, array, list, dictonary
