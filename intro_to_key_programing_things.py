@@ -80,8 +80,8 @@ def add(num1, num2):
 #modularity reusibility and limits duplication
 
 #usser defined function
-ussernum1 = int(input("give me a number"))
-ussernum2 = int(input("give me another one"))
+ussernum1 = int(input("give me a number "))
+ussernum2 = int(input("give me another one "))
 
 def usser_add(ussernum1, ussernum2): #thease () are the paramiters
     print(ussernum1 + ussernum2) #also () are the paramiters
@@ -101,4 +101,4 @@ print(subtract(4,2))
 diffrence = subtract (5,3)
 
 #simple data type, charater string, integer, float, boolean
-#complex data type enumeration, array, list, object
+#complex data type enumeration, array, list, libary
