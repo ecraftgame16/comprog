@@ -1,7 +1,7 @@
 num1 = int(input("give me a number. "))
 num2 = int(input("give me another number. "))
 operator = int(input("""and finaly whitch operator do you want? 
-          1 addiotion
+          1 addition
           2 subtraction
           3 multipication
           4 division. """))
