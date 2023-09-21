@@ -100,3 +100,12 @@ print (x[y])
 # #infinate loop
 # #whale true:
 # #   print (Anya Forger)
+
+#complex condition
+if 5<10 and 10>5:
+    pass
+
+#exit condition 
+import sys
+if 5<4:
+    sys.exit(0)
