@@ -33,4 +33,4 @@ elif operator == 4:
     divison (num1,num2)
 
 else:
-    print("error please enter a nimber 1-4 depending on the operator")
+    print("error please enter a number 1-4 depending on the operator")
