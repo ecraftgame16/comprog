@@ -1,5 +1,3 @@
-
-
 while True:
             player1 = int(input("""player 1 make a pick
                         1 rock
