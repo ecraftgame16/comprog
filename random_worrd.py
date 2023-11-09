@@ -1,10 +1,6 @@
 import random
-i = random.randint(0,267751)
-with open('words.txt', 'r') as f:
-    line = f.read()
-    words = line.split()
-    wrods_list=[]
-    for wordle in words:
-        wrods_list.append
-word = wrods_list[i]
-print(word)
+words_list=[]
+f =open("words.txt","r")
+for x in f:
+    words_list.append(x)
+print (random.choice(words_list))
