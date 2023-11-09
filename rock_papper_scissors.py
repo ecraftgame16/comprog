@@ -3,6 +3,8 @@ while True:
                         1 rock
                         2 papper
                         3 scissors:>"""))
+            for i in range (500):
+                print("")
             player2 = int(input("""player 2 make a pick
                         1 rock
                         2 papper
