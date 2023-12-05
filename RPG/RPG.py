@@ -1,7 +1,7 @@
 #imports
 import random
 from seting import *
-# from tasks import task_1
+from tasks import *
 
 
 #variabls
@@ -9,25 +9,41 @@ inventory = []
 
 
 #game code
-def game():
+def main_game():
 
+    day_start = True
     while seting.curent_helth > 0:
         if day_start == True:
-            # task_1()
+            task_number = random.randint(1,5)
+            print (task_number)
+            taskes_asked = []
+            taskes_asked.append(task_number)
+            taskes_asked.sort
+            if task_number in taskes_asked:
+                continue
+            if task_number == 1:
+                task_1()
+            elif task_number == 2:
+                task_2()
+            elif task_number == 3:
+                task_3()
+            elif task_number == 4:
+                task_4()
+            elif task_number == 5:
+                task_5()
+            accept = input(f"{name} will you take on this task y/n:>")
+            if accept == "y" or "Y":
+                day_start = False
+            else: 
+                "you laze around for the day"
+
+        else:
+
             pass
 
 
 
 #driver
 name = input("hello adventurer welcome, now please tell me adventurer what is your name?:>")
-print(f"The year is taisho 12 (1923) the date is may 2nd in Chiba japan your name is {name} you find yourself in your villa over looking the mountain when a person from the local village comes to you")
-print('''villager:
-    {name} help will you please go into the forest and get me some wood so i can buld a house you will be payd hansomly of course''')
-acept_task = input("will you take on this task {name}? y/n:>")
-if acept_task == "y":
-    day_start = False
-    game()
-else:
-    print("you laze around thoughout the day")
-    day_start = True
-    game()
+
+main_game()
