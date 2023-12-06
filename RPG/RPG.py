@@ -36,10 +36,9 @@ def main_game():
                 day_start = False
             else: 
                 "you laze around for the day"
-
+                
         else:
-
-            pass
+            action = input("""what would you like to do w - walk i - inventory""")
 
 
 
