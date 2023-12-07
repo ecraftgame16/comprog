@@ -13,41 +13,10 @@ inventory = []
 #game code
 def main_game():
     day_start = True #makes new day true for start of while loop
-    tasks_asked = []  # Keep track of asked tasks
-
+    
     while seting.curent_helth > 0 and game_finished == False:
-        if day_start:
-            while True:
-                task_number = random.randint(1, 5)
-                if task_number not in tasks_asked:  # Check if the task has not been asked before
-                    tasks_asked.append(task_number)  # Add the new task to the list
-                    break  # Exit the loop once a new task is found
-            
-            #calling the tasks
-            print("A local villiger comes up to you and asks ...")
-            time.sleep(2)
-            if task_number == 1:
-                task_1(name)
-                day_start = False
-                continue
-            elif task_number == 2:
-                task_2(name)
-                day_start = False
-                continue
-            elif task_number == 3:
-                task_3(name)
-                day_start = False
-                continue
-            elif task_number == 4:
-                task_4(name)
-                day_start = False
-                continue
-            elif task_number == 5:
-                task_5(name)
-                day_start = False
-                continue
-            else:
-                print("all tasks done") #debug
+        if day_start == True:
+            task_selection()
             accept = input(f"{name} will you take on this task y/n:>")
             if accept == "y":
                 day_start = False
@@ -61,6 +30,32 @@ def main_game():
         else:
             action = input("""what would you like to do w - walk i - inventory:>""")
 
+def task_selection():
+    tasks_asked = []  # Keep track of asked tasks
+    while True:
+        task_number = random.randint(1, 5)
+        if task_number not in tasks_asked:  # Check if the task has not been asked before
+            tasks_asked.append(task_number)  # Add the new task to the list
+            break  # Exit the loop once a new task is found
+    
+    #calling the tasks
+    print("A local villiger comes up to you and asks ...")
+    time.sleep(2)
+    if task_number == 1:
+        task_1(name)
+        day_start = False
+    elif task_number == 2:
+        task_2(name)
+        day_start = False
+    elif task_number == 3:
+        task_3(name)
+        day_start = False
+    elif task_number == 4:
+        task_4(name)
+        day_start = False
+    elif task_number == 5:
+        task_5(name)
+        day_start = False
 
 
 #driver
