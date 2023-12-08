@@ -20,5 +20,4 @@ def tutorial(name):
             task = False
         else:
             print("please accept the task")
-    print ("got here")
     print ("allright we have accepted the task next up is ")
