@@ -1,6 +1,8 @@
 import time
 from seting import *
 def tutorial(name):
+    print ("tutorial is not yet completed")
+    exit()
     print(f"hello {name} welcome to the tutorial evrything done hear will not affect your game play")
     print ("starting tutorial")
     print ("...")
