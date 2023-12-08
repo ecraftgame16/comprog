@@ -128,8 +128,16 @@ def atack_player_first(atacker):
             exit()
 
         if enime_helth <= 0:
-            profit = random.randint(10-50)
+            profit = random.randint(10, 50)
             print (f"you beat them you have won {profit}")
+            hp_gain = random.randint (20, 30)
+            total_health = hp_gain + seting.curent_helth
+            if total_health <= seting.max_health:
+                seting.curent_helth += hp_gain
+                print(f"you gain {hp_gain} health totaling {total_health}")
+            elif total_health > seting.max_health:
+                seting.curent_helth = seting.max_health
+                print(f"your health goes back to max which is {seting.max_health}")
 
 
 def atack_enimie_first(atacker):
@@ -162,8 +170,16 @@ def atack_enimie_first(atacker):
             exit()
 
         if enime_helth <= 0:
-            profit = random.randint(10-50)
-            print (f"you beat them you have won {profit}")   
+            profit = random.randint(10, 50)
+            print (f"you beat them you have won {profit}")
+            hp_gain = random.randint (20, 30)
+            total_health = hp_gain + seting.curent_helth
+            if total_health <= seting.max_health:
+                seting.curent_helth += hp_gain
+                print(f"you gain {hp_gain} health totaling {total_health}")
+            elif total_health > seting.max_health:
+                seting.curent_helth = seting.max_health
+                print(f"your health goes back to max which is {seting.max_health}")
 
 #driver
 name = input("hello adventurer welcome, now please tell me adventurer what is your name?:>")
