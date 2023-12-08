@@ -48,8 +48,7 @@ def main_game():
         else:
             action = input("""what would you like to do w - walk i - inventory:>""")
             if action == "w":     
-                # atack = random.randint (1,3)
-                atack = 2
+                atack = random.randint (1,3)
                 if atack == 2:
                     atacker = random.choice(seting.lEnimies)
                     print(f"ohh no a foe has apperd it is a {atacker} hear is a discription")
