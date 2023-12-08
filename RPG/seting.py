@@ -54,6 +54,7 @@ class seting():
         }
         
     }
+    lDecorationItems = list(items_decoration)
 
     enimies = {
         "Mountain Tengu" : {
@@ -70,11 +71,20 @@ class seting():
             "health minumim" : 130,
             "health maxumim" : 200
         },
-        "name" : {
-            "discription" : "",
-            "dammage minum" : 40,
-            "dammage maximum" : 60,
-            "health minumim" : 120,
-            "health maxumim" : 200
+        "Bandit Gang" : {
+            "discription" : "a group of 3 thieves human",
+            "dammage minum" : 50,
+            "dammage maximum" : 70,
+            "health minumim" : 130,
+            "health maxumim" : 250
         },
     }
+    lEnimies = list(enimies)
+    
+        # "name" : {
+        #     "discription" : "",
+        #     "dammage minum" : 40,
+        #     "dammage maximum" : 60,
+        #     "health minumim" : 120,
+        #     "health maxumim" : 200
+        # },
