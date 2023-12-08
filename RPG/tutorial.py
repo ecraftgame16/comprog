@@ -14,7 +14,7 @@ def tutorial(name):
     print ("then the game will ask you if you will acept this task this time lets accept the task")
     task = True
     while task == True:
-        task_aceptence = input (f"{name} will you accept this task y/n")
+        task_aceptence = input (f"{name} will you accept this task y/n:>")
         if task_aceptence == "y":
             print ("allright lets go on our adventure")
             task = False
@@ -78,8 +78,7 @@ def tutorial(name):
     while run2 == True:
         run_fail = input("would you like to try and run - r or atack - a:>")
         if run_fail == "r":
-            print("yay we got away that was close")
-            run1 = False
+            run2 = False
         elif run_fail == "a":
             print ("please input r which stands for run for this one")
         else:
@@ -119,8 +118,8 @@ def tutorial(name):
         if fightpromt == "a":
             print ("you do 150 damage and defeat the Yokai")
             print ("you gain 50 coins")
-            print("you gain 30 HP leaving 80/100")
-            fihgt = False
+            print("you gain 20 HP leaving 100/100")
+            fight = False
         elif fightpromt == "r":
             print ("please slect a for atack")
         else:

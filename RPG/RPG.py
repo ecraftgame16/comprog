@@ -13,9 +13,14 @@ inventory = []
 #game code
 def main_game():
     day_start = True #makes new day true for start of while loop
-    day = 1
+    day = 0
     while seting.curent_helth > 0 and game_finished == False:
         if day_start == True:
+            day += 1
+            if day == 5:
+                the_Great_Kanto_Earthquake()
+            walked_times = 0
+            arived = False
             if day > 1:
                 seting.max_health += 50
             seting.curent_helth = seting.max_health
@@ -46,8 +51,18 @@ def main_game():
                         time.sleep(3)
                         indicive = False
         else:
+            if walked_times >= 70 and arived == False:
+                arived = True
+                print("you have arived and done your task")
+                print ("time to return home")
+                walked_times = 0
+            elif walked_times >= 70 and arived == True:
+                print ("we made it home finaly")
+                day_start = True
+                continue
             action = input("""what would you like to do w - walk i - inventory:>""")
-            if action == "w":     
+            if action == "w":
+                walked_times += 1     
                 atack = random.randint (1,3)
                 if atack == 2:
                     atacker = random.choice(seting.lEnimies)
@@ -180,6 +195,15 @@ def atack_enimie_first(atacker):
             elif total_health > seting.max_health:
                 seting.curent_helth = seting.max_health
                 print(f"your health goes back to max which is {seting.max_health}")
+
+def the_Great_Kanto_Earthquake():
+    print ("september 11th 1923")
+    print ("today no one comes up to ask you somthing you decide to enjoy the day")
+    print ("as you are cooking lunch over a fire it is around 11:59AM ")
+    print ("you hear a rumbling")
+    print ("...")
+    time.sleep(5)
+    
 
 #driver
 name = input("hello adventurer welcome, now please tell me adventurer what is your name?:>")
