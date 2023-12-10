@@ -232,6 +232,7 @@ def the_Great_Kanto_Earthquake():
     {name} story, marked by courage, kindness, and a zest for life,
     continued to inspire those who remembered the adventurer who had once called the mountain
     villa their home.""")
+    exit()
 
 
 #driver
