@@ -203,7 +203,36 @@ def the_Great_Kanto_Earthquake():
     print ("you hear a rumbling")
     print ("...")
     time.sleep(5)
-    
+    print (f"""The ground shook violently, and {name} felt the villa shudder around them.
+    In a matter of seconds, the once-steady mountain retreat became a perilous trap""")
+    print (f"""With quick thinking, {name} attempted to escape the collapsing villa.
+    But as they dashed through the doorway, a massive quake shook the foundation, causing {name} to stumble. 
+    In a tragic turn of events, they fell back into the villa,
+    right into the open fire they had been cooking over.""")
+    print (f"""The quake had ruptured a gas line, and within moments, 
+    the villa was engulfed in flames. Trapped among the inferno, 
+    {name} was overcome by the blaze. Despite their many adventures and close calls, 
+    this unforeseen disaster claimed their life.""")
+    print (f"""When the earthquake subsided, 
+    the villagers in the valley below noticed a plume of smoke rising from the mountainside. 
+    Fearing the worst, they quickly formed search parties and ascended the mountain to MC's villa. 
+    Upon arrival, they were met with a heartbreaking sight - the villa, {name} beloved home, was reduced to ashes.""")
+    print (f"""The entire village mourned the loss of {name}. 
+    They remembered the adventurer not only for their heroic deeds but also for the quiet moments 
+    - the times {name} had shared stories of distant lands, helped mend fences, and joined in village celebrations. 
+    MC had been more than an adventurer; they had been a friend, a neighbor, and a cherished member of the community.""")
+    print (f"""In honor of {name}, the villagers held a solemn and dignified funeral.
+    They gathered amidst the ruins of the villa, sharing memories and paying tribute to the life and spirit of {name}. 
+    As the funeral pyre burned against the backdrop of the mountains,
+    the villagers sang a song of farewell,
+    a melody of gratitude and remembrance for an adventurer who had become part of their lives.""")
+    print (f"""In the heart of Chiba, a memorial was erected at the site of the villa.
+    It stood not only as a testament to {name} adventurous
+    spirit but also as a symbol of the bond they had formed with the villagers.
+    {name} story, marked by courage, kindness, and a zest for life,
+    continued to inspire those who remembered the adventurer who had once called the mountain
+    villa their home.""")
+
 
 #driver
 name = input("hello adventurer welcome, now please tell me adventurer what is your name?:>")
