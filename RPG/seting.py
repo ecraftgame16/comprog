@@ -81,6 +81,7 @@ class seting():
     }
     lEnimies = list(enimies)
     
+        # enimie template
         # "name" : {
         #     "discription" : "",
         #     "dammage minum" : 40,

@@ -1,5 +1,6 @@
 import time
 from seting import *
+#all while loops are to make sure player does the promted input
 def tutorial(name):
     print(f"hello {name} welcome to the tutorial evrything done hear will not affect your game play")
     print ("starting tutorial")
