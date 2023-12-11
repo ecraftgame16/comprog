@@ -1,132 +1,132 @@
 import time
 from seting import *
-#all while loops are to make sure player does the promted input
+
+# all while loops are to make sure player does the prompted input
 def tutorial(name):
-    print(f"hello {name} welcome to the tutorial evrything done hear will not affect your game play")
-    print ("starting tutorial")
-    print ("...")
+    print(f"hello {name}, welcome to the tutorial. Everything done here will not affect your gameplay.")
+    print("Starting tutorial...")
     time.sleep(3)
-    print ("tutorial started")
-    print ("in the actual game items dammage and such are randomised here they are going to be the same evry time")
-    print ("every new day you will get a new task and then a random fairness of payment")
-    print ("the villager will come to you and ask you to do somthing here is an example")
-    print (f"""villager:
-           {name} Will you please go into the peeks and resuce my Daughter she went up there and got stuck  you will be payed fairly of course:>""")
-    print ("then the game will ask you if you will acept this task this time lets accept the task")
+    print("Tutorial started")
+    print("In the actual game, items, damage, and such are randomized. Here they are going to be the same every time.")
+    print("Every new day, you will get a new task and then a random fairness of payment.")
+    print("The villager will come to you and ask you to do something. Here is an example:")
+    print(f"""Villager:
+           {name}, will you please go into the peaks and rescue my daughter? She went up there and got stuck. You will be paid fairly, of course.>""")
+    print("Then the game will ask you if you will accept this task. This time, let's accept the task.")
     task = True
-    while task == True:
-        task_aceptence = input (f"{name} will you accept this task y/n:>")
-        if task_aceptence == "y":
-            print ("allright lets go on our adventure")
+    while task:
+        task_acceptance = input(f"{name}, will you accept this task y/n:>")
+        if task_acceptance == "y":
+            print("Alright, let's go on our adventure.")
             task = False
         else:
-            print("please accept the task")
-    print ("allright we have accepted the task next up is to start going")
-    print ("once you accept the task we must leave the villa")
-    print ("that game will ask if you would like to walk -w or cheack inventory -i in the promt following this lets open our inventory")
+            print("Please accept the task.")
+    print("Alright, we have accepted the task. Next up is to start going.")
+    print("Once you accept the task, we must leave the villa.")
+    print("The game will ask if you would like to walk - w or check inventory - i in the prompt following this. Let's open our inventory.")
     inventory = True
-    while inventory == True:
-        inventoryPromt = input("what would you like to do w - walk i - inventory:>")
-        if inventoryPromt == "i":
-            print("you have [] in your inventory")
-            print("you have 0 curent money")
-            print("your health is 100/100")
+    while inventory:
+        inventoryPrompt = input("What would you like to do? w - walk, i - inventory:>")
+        if inventoryPrompt == "i":
+            print("You have [] in your inventory.")
+            print("You have 0 current money.")
+            print("Your health is 100/100.")
             inventory = False
-        elif inventoryPromt == "w":
-            print ("please slect i")
+        elif inventoryPrompt == "w":
+            print("Please select i.")
         else:
-            print ("make sure you only slect i nothing else")
-    print ("now lets go on our task this time lets press w in the promt")
-    print("every time you press w you will be promted to chose again uless ofcourse somthing happens")
+            print("Make sure you only select i, nothing else.")
+    print("Now let's go on our task. This time, let's press w in the prompt.")
+    print("Every time you press w, you will be prompted to choose again, unless of course something happens.")
     walk = True
     walkTime = 0
-    while walk == True and walkTime <= 6:
-        walkpromt= input("what would you like to do w - walk i - inventory:>")
-        if walkpromt == "w":
+    while walk and walkTime <= 6:
+        walkPrompt = input("What would you like to do? w - walk, i - inventory:>")
+        if walkPrompt == "w":
             walkTime += 1
-        elif walkpromt == "i":
-            print ("please slect w")
+        elif walkPrompt == "i":
+            print("Please select w.")
         else:
-            print ("make sure you only slect w nothing else")
-    print ("oh no we came across a Bandet gang here is a discription")
-    print(seting.enimies["Bandit Gang"]['discription'])
-    print ("we have 2 options 1 atack with is a and 2 run which is r when you run you have a 50 percent chance of geting away")
-    print("lets run this time i dont like are chances 3 agenst 1")
+            print("Make sure you only select w, nothing else.")
+    print("Oh no, we came across a Bandit gang. Here is a description:")
+    print(setting.enemies["Bandit Gang"]['description'])
+    print("We have 2 options: 1 attack, which is 'a', and 2 run, which is 'r'. When you run, you have a 50 percent chance of getting away.")
+    print("Let's run this time; I don't like our chances 3 against 1.")
     run1 = True
-    while run1 == True:
-        run_success = input("would you like to try and run - r or atack - a:>")
+    while run1:
+        run_success = input("Would you like to try and run - r or attack - a:>")
         if run_success == "r":
-            print("yay we got away that was close")
+            print("Yay, we got away. That was close.")
             run1 = False
         elif run_success == "a":
-            print ("please input r which stands for run for this one")
+            print("Please input r, which stands for run, for this one.")
         else:
-            print ("make sure you only have the r nothing else")
+            print("Make sure you only have the r, nothing else.")
     walk = True
-    walktime = 0
-    while walk == True and walkTime <= 6:
-        walkpromt= input("what would you like to do w - walk i - inventory:>")
-        if walkpromt == "w":
+    walkTime = 0
+    while walk and walkTime <= 6:
+        walkPrompt = input("What would you like to do? w - walk, i - inventory:>")
+        if walkPrompt == "w":
             walkTime += 1
-        elif walkpromt == "i":
-            print ("please slect w")
+        elif walkPrompt == "i":
+            print("Please select w.")
         else:
-            print ("make sure you only slect w nothing else")
-    print ("ohh no another emany this time it is a Forest Yokai hear is a discription")
-    print (seting.enimies["Forest Yokai"]["discription"])
-    print ("lets run again")
+            print("Make sure you only select w, nothing else.")
+    print("Oh no, another enemy. This time it is a Forest Yokai. Here is a description:")
+    print(setting.enemies["Forest Yokai"]["description"])
+    print("Let's run again.")
     run2 = True
-    while run2 == True:
-        run_fail = input("would you like to try and run - r or atack - a:>")
+    while run2:
+        run_fail = input("Would you like to try and run - r or attack - a:>")
         if run_fail == "r":
             run2 = False
         elif run_fail == "a":
-            print ("please input r which stands for run for this one")
+            print("Please input r, which stands for run, for this one.")
         else:
-            print ("make sure you only have the r nothing else")
-    print ("dang we couldent get away this time")
-    print ("you took 50 damage")
-    print ("im mad lets fight this")
-    atackvar = True
-    while atackvar == True:
-        atack = input("would you like to atack or runaway? a - atack r - run:>")
-        if atack == "a":
-            print ("you do 150 damage and defeat the Yokai")
-            print ("you gain 50 coins")
-            print("you gain 30 HP leaving 80/100")
-            atackvar = False
-        elif atack == "r":
-            print ("please slect a for atack")
+            print("Make sure you only have the r, nothing else.")
+    print("Dang, we couldn't get away this time.")
+    print("You took 50 damage.")
+    print("I'm mad. Let's fight this.")
+    attackVar = True
+    while attackVar:
+        attack = input("Would you like to attack or run away? a - attack, r - run:>")
+        if attack == "a":
+            print("You do 150 damage and defeat the Yokai.")
+            print("You gain 50 coins.")
+            print("You gain 30 HP, leaving you at 80/100.")
+            attackVar = False
+        elif attack == "r":
+            print("Please select a for attack.")
         else:
-            print ("make sure you only input a nothing else")
-    print ("hey 50 coins thats cool anyway lets continue")
+            print("Make sure you only input a, nothing else.")
+    print("Hey, 50 coins, that's cool. Anyway, let's continue.")
     walk = True
-    walktime = 0
-    while walk == True and walkTime <= 6:
-        walkpromt= input("what would you like to do w - walk i - inventory:>")
-        if walkpromt == "w":
+    walkTime = 0
+    while walk and walkTime <= 6:
+        walkPrompt = input("What would you like to do? w - walk, i - inventory:>")
+        if walkPrompt == "w":
             walkTime += 1
-        elif walkpromt == "i":
-            print ("please slect w")
+        elif walkPrompt == "i":
+            print("Please select w.")
         else:
-            print ("make sure you only slect w nothing else")
-    print("ohh no not another emany this time it is a Mountain Tengu hear is a discription")
-    print (seting.enimies['Mountain Tengu']['discription'])
-    print ("im felling confident this time lets fight isted of runing")
+            print("Make sure you only select w, nothing else.")
+    print("Oh no, not another enemy. This time it is a Mountain Tengu. Here is a description:")
+    print(setting.enemies['Mountain Tengu']['description'])
+    print("I'm feeling confident this time. Let's fight instead of running.")
     fight = True
-    while fight == True:
-        fightpromt = input("would you like to atack or runaway? a - atack r - run:>")
-        if fightpromt == "a":
-            print ("you do 150 damage and defeat the Yokai")
-            print ("you gain 50 coins")
-            print("you gain 20 HP leaving 100/100")
+    while fight:
+        fightPrompt = input("Would you like to attack or run away? a - attack, r - run:>")
+        if fightPrompt == "a":
+            print("You do 150 damage and defeat the Yokai.")
+            print("You gain 50 coins.")
+            print("You gain 20 HP, leaving you at 100/100.")
             fight = False
-        elif fightpromt == "r":
-            print ("please slect a for atack")
+        elif fightPrompt == "r":
+            print("Please select a for attack.")
         else:
-            print ("make sure you only input a nothing else")
-    print ("and finaly we made it we saved the person lets go home")
-    print (f"you are now ready to play the game {name} good luck")
-    print ("shuting down tutorial")
-    print ("...")
+            print("Make sure you only input a, nothing else.")
+    print("And finally, we made it. We saved the person. Let's go home.")
+    print(f"You are now ready to play the game, {name}. Good luck!")
+    print("Shutting down tutorial...")
+    print("...")
     time.sleep(3)

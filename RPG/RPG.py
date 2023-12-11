@@ -1,104 +1,102 @@
-#imports
+# imports
 import random
 import time
 from seting import *
 from tasks import *
 from tutorial import tutorial
 
-
-#variabls
+# variables
 inventory = []
 
-
-#game code
+# game code
 def main_game():
-    day_start = True #makes new day true for start of while loop
+    day_start = True  # makes new day true for start of while loop
     day = 0
-    while seting.curent_helth > 0 and game_finished == False:
+    while setting.current_health > 0 and game_finished == False:
         if day_start == True:
             day += 1
             if day == 5:
                 the_Great_Kanto_Earthquake()
             walked_times = 0
-            arived = False
+            arrived = False
             if day > 1:
-                seting.max_health += 50
-            seting.curent_helth = seting.max_health
+                setting.max_health += 50
+            setting.current_health = setting.max_health
             task_selection()
             accept = input(f"{name} will you take on this task y/n:>")
             if accept == "y":
                 day_start = False
-            elif accept == "n": 
-                print ("you laze around for the day")
-                print ("...")
+            elif accept == "n":
+                print("you laze around for the day")
+                print("...")
                 time.sleep(10)
                 print("it is now the next day")
                 time.sleep(3)
                 continue
             else:
                 print("please use y for yes and n for no")
-                indicive = True
-                while indicive == True:
+                indecisive = True
+                while indecisive == True:
                     accept = input(f"{name} will you take on this task y/n:>")
                     if accept == "y":
                         day_start = False
-                        indicive = False
+                        indecisive = False
                     elif accept == "n":
-                        print ("you laze around for the day")
-                        print ("...")
+                        print("you laze around for the day")
+                        print("...")
                         time.sleep(10)
                         print("it is now the next day")
                         time.sleep(3)
-                        indicive = False
-        else: #main functions 
-            #when player has walked 70 times they arive at there destination
-            if walked_times >= 70 and arived == False: 
-                arived = True
-                print("you have arived and done your task")
-                print ("time to return home")
-                walked_times = 0 #resets walk time for the return walk
-            #cheacks if the player has both arived and walked 70 more times
-            elif walked_times >= 70 and arived == True:
-                print ("we made it home finaly")
+                        indecisive = False
+        else:  # main functions
+            # when player has walked 70 times they arrive at their destination
+            if walked_times >= 70 and arrived == False:
+                arrived = True
+                print("you have arrived and done your task")
+                print("time to return home")
+                walked_times = 0  # resets walk time for the return walk
+            # checks if the player has both arrived and walked 70 more times
+            elif walked_times >= 70 and arrived == True:
+                print("we made it home finally")
                 day_start = True
                 continue
             action = input("""what would you like to do w - walk i - inventory:>""")
-            #makes walking work and calles atacks
+            # makes walking work and calls attacks
             if action == "w":
-                walked_times += 1     
-                atack = random.randint (1,3)
-                if atack == 2: #if the number selected is 2 starts the atack option
-                    atacker = random.choice(seting.lEnimies)#selects the ename
-                    print(f"ohh no a foe has apperd it is a {atacker} hear is a discription") #discribies the ename
-                    print(seting.enimies[atacker]['discription'])
-                    run_atack = input("would you like to try and run - r or atack - a:>")#asks if player wants to run or atack
-                    if run_atack == "a": 
-                        atack_player_first(atacker) #calls atack where player atacks first since they chose atack
-                    elif run_atack == "r":
-                        sucess = random.randint(1,50)
-                        if sucess % 2 == 0: #cheacks if player ran away susscessfully
-                            print ("you got away")
+                walked_times += 1
+                attack = random.randint(1, 3)
+                if attack == 2:  # if the number selected is 2 starts the attack option
+                    attacker = random.choice(setting.lEnemies)  # selects the enemy
+                    print(f"oh no a foe has appeared it is a {attacker} here is a description")  # describes the enemy
+                    print(setting.enemies[attacker]['description'])
+                    run_attack = input("would you like to try and run - r or attack - a:>")  # asks if player wants to run or attack
+                    if run_attack == "a":
+                        attack_player_first(attacker)  # calls attack where player attacks first since they chose attack
+                    elif run_attack == "r":
+                        success = random.randint(1, 50)
+                        if success % 2 == 0:  # checks if player ran away successfully
+                            print("you got away")
                             continue
-                        else: #if player didn't run away succsefuly tels player and calles the enime atacking first
+                        else:  # if player didn't run away successfully tells player and calls the enemy attacking first
                             print("you couldn't run away")
-                            atack_enimie_first(atacker)
-            elif action == "i": #runs invetory cheack
+                            attack_enemy_first(attacker)
+            elif action == "i":  # runs inventory check
                 print(f"you have {inventory} in your inventory")
-                print(f"you have {money} curent money")
-                print(f"your health is {seting.curent_helth}/{seting.max_health}")
-            else: #error cheack 
+                print(f"you have {money} current money")
+                print(f"your health is {setting.current_health}/{setting.max_health}")
+            else:  # error check
                 print("invalid input please use i for inventory or w for walking")
 
-def task_selection():#selects tasks
+def task_selection():  # selects tasks
     tasks_asked = []  # Keep track of asked tasks
     while True:
         task_number = random.randint(1, 5)
         if task_number not in tasks_asked:  # Check if the task has not been asked before
             tasks_asked.append(task_number)  # Add the new task to the list
             break  # Exit the loop once a new task is found
-    
-    #calling the tasks from tasks.py
-    print("A local villiger comes up to you and asks ...")
+
+    # calling the tasks from tasks.py
+    print("A local villager comes up to you and asks ...")
     time.sleep(3)
     if task_number == 1:
         task_1(name)
@@ -116,90 +114,91 @@ def task_selection():#selects tasks
         task_5(name)
         day_start = False
 
-#function called when player choses atack
-def atack_player_first(atacker):
-    enime_helth = random.randint (seting.enimies[atacker]["health minumim"],seting.enimies[atacker]["health maxumim"])
+# Function called when player chooses attack
+def attack_player_first(attacker):
+    enemy_health = random.randint(setting.enemies[attacker]["health minimum"], setting.enemies[attacker]["health maximum"])
     not_run = True
-    while enime_helth > 0 and seting.curent_helth > 0 and not_run == True:
-        #player's atack
-        if seting.curent_helth > 0:
-            run_atack = input("would you like to atack or runaway? a - atack r - run:>")
-            if run_atack == "a":
+    while enemy_health > 0 and setting.current_health > 0 and not_run == True:
+        # Player's attack
+        if setting.current_health > 0:
+            run_attack = input("Would you like to attack or run away? a - attack, r - run:>")
+            if run_attack == "a":
                 hero_damage = random.randint(30,60)
-                enime_helth -= hero_damage
-                print (f"you do {hero_damage} damage")
-            elif run_atack == "r":
-                sucess = random.randint(1,50)
-                if sucess % 2 == 0:
-                    print ("you got away")
+                enemy_health -= hero_damage
+                print(f"You do {hero_damage} damage")
+            elif run_attack == "r":
+                success = random.randint(1,50)
+                if success % 2 == 0:
+                    print("You got away")
                     not_run = False
                 else:
-                    print("you couldn't run away")
+                    print("You couldn't run away")
         
-        #enime's atack
-        if enime_helth > 0 and not_run == True:
-            enime_damage = random.randint(seting.enimies[atacker]["dammage minum"],seting.enimies[atacker]["dammage maximum"])
-            print (f"you got hit you took {enime_damage} damage")
-            seting.curent_helth -= enime_damage
+        # Enemy's attack
+        if enemy_health > 0 and not_run == True:
+            enemy_damage = random.randint(setting.enemies[attacker]["damage minimum"], setting.enemies[attacker]["damage maximum"])
+            print(f"You got hit and took {enemy_damage} damage")
+            setting.current_health -= enemy_damage
 
-        if seting.curent_helth <= 0:
-            print("You have died and faild the mission sorry")
+        if setting.current_health <= 0:
+            print("You have died and failed the mission, sorry")
             exit()
 
-        if enime_helth <= 0:
+        if enemy_health <= 0:
             profit = random.randint(10, 50)
-            print (f"you beat them you have won {profit}")
-            hp_gain = random.randint (20, 30)
-            total_health = hp_gain + seting.curent_helth
-            if total_health <= seting.max_health:
-                seting.curent_helth += hp_gain
-                print(f"you gain {hp_gain} health totaling {total_health}")
-            elif total_health > seting.max_health:
-                seting.curent_helth = seting.max_health
-                print(f"your health goes back to max which is {seting.max_health}")
+            print(f"You beat them and have won {profit}")
+            hp_gain = random.randint(20, 30)
+            total_health = hp_gain + setting.current_health
+            if total_health <= setting.max_health:
+                setting.current_health += hp_gain
+                print(f"You gain {hp_gain} health, totaling {total_health}")
+            elif total_health > setting.max_health:
+                setting.current_health = setting.max_health
+                print(f"Your health goes back to max, which is {setting.max_health}")
 
-#the function called when the player runs and fails
-def atack_enimie_first(atacker):
-    #enime's atack
-    enime_helth = random.randint (seting.enimies[atacker]["health minumim"],seting.enimies[atacker]["health maxumim"])
+# Function called when the player runs and fails
+def attack_enemy_first(attacker):
+    # Enemy's attack
+    enemy_health = random.randint(setting.enemies[attacker]["health minimum"], setting.enemies[attacker]["health maximum"])
     not_run = True
-    while enime_helth > 0 and seting.curent_helth > 0 and not_run == True:
-        if enime_helth > 0 and not_run == True:
-            enime_damage = random.randint(seting.enimies[atacker]["dammage minum"],seting.enimies[atacker]["dammage maximum"])
-            print (f"you got hit you took {enime_damage} damage")
-            seting.curent_helth -= enime_damage
+    while enemy_health > 0 and setting.current_health > 0 and not_run == True:
+        if enemy_health > 0 and not_run == True:
+            enemy_damage = random.randint(setting.enemies[attacker]["damage minimum"], setting.enemies[attacker]["damage maximum"])
+            print(f"You got hit and took {enemy_damage} damage")
+            setting.current_health -= enemy_damage
         
-        #player's atack
-        if seting.curent_helth > 0:
-            run_atack = input("would you like to atack or runaway? a - atack r - run:>")
-            if run_atack == "a":
+        # Player's attack
+        if setting.current_health > 0:
+            run_attack = input("Would you like to attack or run away? a - attack, r - run:>")
+            if run_attack == "a":
                 hero_damage = random.randint(20,40)
-                enime_helth -= hero_damage
-                print (f"you do {hero_damage} damage")
-            elif run_atack == "r":
-                sucess = random.randint(1,50)
-                if sucess % 2 == 0:
-                    print ("you got away")
+                enemy_health -= hero_damage
+                print(f"You do {hero_damage} damage")
+            elif run_attack == "r":
+                success = random.randint(1,50)
+                if success % 2 == 0:
+                    print("You got away")
                     not_run = False
                 else:
-                    print("you couldn't run away")
+                    print("You couldn't run away")
 
-        if seting.curent_helth <= 0: #cheaks if player is dead
-            print("You have died and faild the mission sorry")
+        if setting.current_health <= 0:  # Checks if player is dead
+            print("You have died and failed the mission, sorry")
             exit()
 
-        if enime_helth <= 0: #cheaks if enamy is defeted
+        if enemy_health <= 0:  # Checks if enemy is defeated
             profit = random.randint(10, 50)
-            print (f"you beat them you have won {profit}")
-            hp_gain = random.randint (20, 30)
-            total_health = hp_gain + seting.curent_helth #defins health after health gain
-            if total_health <= seting.max_health: #makes sure curent health dosent excied max health
-                seting.curent_helth += hp_gain
-                print(f"you gain {hp_gain} health totaling {total_health}")
-            elif total_health > seting.max_health: #if total health greater than max health sets health to max
-                seting.curent_helth = seting.max_health
-                print(f"your health goes back to max which is {seting.max_health}")
+            print(f"You beat them and have won {profit}")
+            hp_gain = random.randint(20, 30)
+            total_health = hp_gain + setting.current_health  # Defines health after health gain
+            if total_health <= setting.max_health:  # Makes sure current health doesn't exceed max health
+                setting.current_health += hp_gain
+                print(f"You gain {hp_gain} health, totaling {total_health}")
+            elif total_health > setting.max_health:  # If total health is greater than max health, sets health to max
+                setting.current_health = setting.max_health
+                print(f"Your health goes back to max, which is {setting.max_health}")
 
+                
 def the_Great_Kanto_Earthquake(): #the final game code
     print ("september 11th 1923")
     print ("today no one comes up to ask you somthing you decide to enjoy the day")
@@ -239,10 +238,10 @@ def the_Great_Kanto_Earthquake(): #the final game code
     exit()
 
 
-#driver
+# driver
 name = input("hello adventurer welcome, now please tell me adventurer what is your name?:>")
 game_finished = False
-tutorial_question = input(f"{name} would you like to go though the tutrial y/n:>")
+tutorial_question = input(f"{name} would you like to go through the tutorial y/n:>")
 money = 0
 if tutorial_question == "y":
     tutorial(name)
