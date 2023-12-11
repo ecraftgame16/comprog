@@ -81,7 +81,7 @@ class seting():
     }
     lEnimies = list(enimies)
     
-        # enimie template
+        # enimie
         # "name" : {
         #     "discription" : "",
         #     "dammage minum" : 40,

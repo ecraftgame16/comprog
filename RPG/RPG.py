@@ -200,7 +200,7 @@ def atack_enimie_first(atacker):
                 seting.curent_helth = seting.max_health
                 print(f"your health goes back to max which is {seting.max_health}")
 
-def the_Great_Kanto_Earthquake(): #the final scene
+def the_Great_Kanto_Earthquake(): #the final game code
     print ("september 11th 1923")
     print ("today no one comes up to ask you somthing you decide to enjoy the day")
     print ("as you are cooking lunch over a fire it is around 11:59AM ")
