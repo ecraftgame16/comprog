@@ -50,22 +50,25 @@ def main_game():
                         indecisive = False
         else:  # main functions
             # when player has walked 70 times they arrive at their destination
-            if walked_times >= 70 and arrived == False:
+            if walked_times >= 5 and arrived == False:
                 arrived = True
                 print("you have arrived and done your task")
                 print("time to return home")
                 walked_times = 0  # resets walk time for the return walk
             # checks if the player has both arrived and walked 70 more times
-            elif walked_times >= 70 and arrived == True:
+            elif walked_times >= 5 and arrived == True:
                 print("we made it home finally")
                 day_start = True
+                new_item = random.choice(setting.lDecorationItems)
+                inventory.append(new_item)
+                inventory.append(setting.items_decoration[new_item])
                 continue
             action = input("""what would you like to do w - walk i - inventory:>""")
             # makes walking work and calls attacks
             if action == "w":
                 walked_times += 1
                 attack = random.randint(1, 3)
-                if attack == 2:  # if the number selected is 2 starts the attack option
+                if attack == 0:  # if the number selected is 2 starts the attack option
                     attacker = random.choice(setting.lEnemies)  # selects the enemy
                     print(f"oh no a foe has appeared it is a {attacker} here is a description")  # describes the enemy
                     print(setting.enemies[attacker]['description'])
