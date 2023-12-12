@@ -60,22 +60,22 @@ class setting():
             "description": "A mythical looking creature with both human and bird like features",
             "damage minimum": 40,
             "damage maximum": 60,
-            "health minimum": 120,
-            "health maximum": 200
+            "health minimum": 110,
+            "health maximum": 130
         },
         "Forest Yokai": {
             "description": "a spirit/demon that appears as a fox",
             "damage minimum": 50,
             "damage maximum": 70,
             "health minimum": 130,
-            "health maximum": 200
+            "health maximum": 140
         },
         "Bandit Gang": {
-            "description": "a group of 3 thieves human",
+            "description": "a group of 2 thieves human",
             "damage minimum": 50,
             "damage maximum": 70,
-            "health minimum": 130,
-            "health maximum": 250
+            "health minimum": 160,
+            "health maximum": 220
         },
     }
     lEnemies = list(enemies)
