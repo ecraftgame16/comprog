@@ -49,14 +49,15 @@ def main_game():
                         time.sleep(3)
                         indecisive = False
         else:  # main functions
-            # when player has walked 70 times they arrive at their destination
-            if walked_times >= 5 and arrived == False:
+            # when player has walked between 10 - 20 times
+            requierd_walk_times = random.randit(10,20)
+            if walked_times >= requierd_walk_times and arrived == False:
                 arrived = True
                 print("you have arrived and done your task")
                 print("time to return home")
                 walked_times = 0  # resets walk time for the return walk
-            # checks if the player has both arrived and walked 70 more times
-            elif walked_times >= 5 and arrived == True:
+            # checks if the player has both arrived and walked then walked 10 - 20 times (the same number it took to get there)
+            elif walked_times >= requierd_walk_times and arrived == True:
                 print("we made it home finally")
                 day_start = True
                 new_item = random.choice(setting.lDecorationItems)
