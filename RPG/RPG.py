@@ -50,7 +50,7 @@ def main_game():
                         indecisive = False
         else:  # main functions
             # when player has walked between 10 - 20 times
-            requierd_walk_times = random.randit(10,20)
+            requierd_walk_times = random.randint(10,20)
             if walked_times >= requierd_walk_times and arrived == False:
                 arrived = True
                 print("you have arrived and done your task")
@@ -69,7 +69,7 @@ def main_game():
             if action == "w":
                 walked_times += 1
                 attack = random.randint(1, 3)
-                if attack == 0:  # if the number selected is 2 starts the attack option
+                if attack == 2:  # if the number selected is 2 starts the attack option
                     attacker = random.choice(setting.lEnemies)  # selects the enemy
                     print(f"oh no a foe has appeared it is a {attacker} here is a description")  # describes the enemy
                     print(setting.enemies[attacker]['description'])
