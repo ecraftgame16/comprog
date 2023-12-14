@@ -127,6 +127,7 @@ def tutorial(name):
             print("Make sure you only input a, nothing else.")
     print("And finally, we made it. We saved the person. Let's go home.")
     print(f"You are now ready to play the game, {name}. Good luck!")
+    print("note this game is still in devlepompent more features coming soon")
     print("Shutting down tutorial...")
     print("...")
     time.sleep(3)

@@ -3,6 +3,7 @@ import random
 import time
 from seting import *
 from tasks import *
+from dev_comands import dev_comands
 from tutorial import tutorial
 
 # variables
@@ -69,7 +70,7 @@ def main_game():
             if action == "w":
                 walked_times += 1
                 attack = random.randint(1, 3)
-                if attack == 2:  # if the number selected is 2 starts the attack option
+                if attack == 2 and do_combat == True:  # if the number selected is 2 starts the attack option and combat is not dissabled from dev commands
                     attacker = random.choice(setting.lEnemies)  # selects the enemy
                     print(f"oh no a foe has appeared it is a {attacker} here is a description")  # describes the enemy
                     print(setting.enemies[attacker]['description'])
@@ -88,6 +89,8 @@ def main_game():
                 print(f"you have {inventory} in your inventory")
                 print(f"you have {money} current money")
                 print(f"your health is {setting.current_health}/{setting.max_health}")
+            elif action == "dc":
+                dev_comands()
             else:  # error check
                 print("invalid input please use i for inventory or w for walking")
 
@@ -247,6 +250,7 @@ name = input("hello adventurer welcome, now please tell me adventurer what is yo
 game_finished = False
 tutorial_question = input(f"{name} would you like to go through the tutorial y/n:>")
 money = 0
+do_combat = True
 if tutorial_question == "y":
     tutorial(name)
 main_game()

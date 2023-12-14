@@ -78,46 +78,46 @@ class setting():
             "health maximum": 220
         },
         "Giant Mountain Serpent": {
-        "description": "A colossal snake dwelling in caves and along mountain rivers, feared for its strength.",
-        "damage minimum": 55,
-        "damage maximum": 65,
-        "health minimum": 150,
-        "health maximum": 200
+            "description": "A colossal snake dwelling in caves and along mountain rivers, feared for its strength.",
+            "damage minimum": 55,
+            "damage maximum": 65,
+            "health minimum": 150,
+            "health maximum": 200
         },
         "Cursed Samurai": {
-        "description": "Armored warrior spirits cursed to guard ancient ruins, relentless in battle.",
-        "damage minimum": 45,
-        "damage maximum": 60,
-        "health minimum": 120,
-        "health maximum": 170
+            "description": "Armored warrior spirits cursed to guard ancient ruins, relentless in battle.",
+            "damage minimum": 45,
+            "damage maximum": 60,
+            "health minimum": 120,
+            "health maximum": 170
         },
         "Elemental Spirit": {
-        "description": "A mystical spirit embodying natural elements, its form shifts with the mountain winds.",
-        "damage minimum": 40,
-        "damage maximum": 55,
-        "health minimum": 100,
-        "health maximum": 150
+            "description": "A mystical spirit embodying natural elements, its form shifts with the mountain winds.",
+            "damage minimum": 40,
+            "damage maximum": 55,
+            "health minimum": 100,
+            "health maximum": 150
         },
         "Rogue Ninja": {
-        "description": "Stealthy and dangerous, these exiled ninjas attack swiftly from the shadows.",
-        "damage minimum": 50,
-        "damage maximum": 70,
-        "health minimum": 130,
-        "health maximum": 160
+            "description": "Stealthy and dangerous, these exiled ninjas attack swiftly from the shadows.",
+            "damage minimum": 50,
+            "damage maximum": 70,
+            "health minimum": 130,
+            "health maximum": 160
         },
         "Jorogumo": {
-        "description": "A deceptive spider yokai that can take on the appearance of a beautiful woman.",
-        "damage minimum": 40,
-        "damage maximum": 60,
-        "health minimum": 140,
-        "health maximum": 180
+            "description": "A deceptive spider yokai that can take on the appearance of a beautiful woman.",
+            "damage minimum": 40,
+            "damage maximum": 60,
+            "health minimum": 140,
+            "health maximum": 180
         },
         "Wild Mountain Beast": {
-        "description": "A massive beast, rumored to be a bear or wolf, that roams the mountain wilderness.",
-        "damage minimum": 45,
-        "damage maximum": 65,
-        "health minimum": 150,
-        "health maximum": 200
+            "description": "A massive beast, rumored to be a bear or wolf, that roams the mountain wilderness.",
+            "damage minimum": 45,
+            "damage maximum": 65,
+            "health minimum": 150,
+            "health maximum": 200
         },
 }
 
