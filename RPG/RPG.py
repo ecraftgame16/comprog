@@ -6,11 +6,14 @@ from tasks import *
 from dev_comands import dev_comands
 from tutorial import tutorial
 
-# variables
-inventory = []
+
+
 
 # game code
 def main_game():
+    inventory = []
+    do_combat = True
+    money = 0
     day_start = True  # makes new day true for start of while loop
     day = 0
     while setting.current_health > 0 and game_finished == False:
@@ -74,23 +77,30 @@ def main_game():
                     attacker = random.choice(setting.lEnemies)  # selects the enemy
                     print(f"oh no a foe has appeared it is a {attacker} here is a description")  # describes the enemy
                     print(setting.enemies[attacker]['description'])
-                    run_attack = input("would you like to try and run - r or attack - a:>")  # asks if player wants to run or attack
-                    if run_attack == "a":
-                        attack_player_first(attacker)  # calls attack where player attacks first since they chose attack
-                    elif run_attack == "r":
-                        success = random.randint(1, 50)
-                        if success % 2 == 0:  # checks if player ran away successfully
-                            print("you got away")
-                            continue
-                        else:  # if player didn't run away successfully tells player and calls the enemy attacking first
-                            print("you couldn't run away")
-                            attack_enemy_first(attacker)
+                    attack_dicision = True
+                    while attack_dicision == True:
+                        run_attack = input("would you like to try and run - r or attack - a:>")  # asks if player wants to run or attack
+                        if run_attack == "a":
+                            attack_dicision = False
+                            money = attack_player_first(attacker, money)  # calls attack where player attacks first since they chose attack
+                        elif run_attack == "r":
+                            success = random.randint(1, 50)
+                            if success % 2 == 0:  # checks if player ran away successfully
+                                attack_dicision = False
+                                print("you got away")
+                                continue
+                            else:  # if player didn't run away successfully tells player and calls the enemy attacking first
+                                attack_dicision = False
+                                print("you couldn't run away")
+                                money = attack_enemy_first(attacker, money)
+                        else:
+                            print("make sure you use a for atack and r for run")
             elif action == "i":  # runs inventory check
                 print(f"you have {inventory} in your inventory")
                 print(f"you have {money} current money")
                 print(f"your health is {setting.current_health}/{setting.max_health}")
             elif action == "dc":
-                dev_comands()
+                inventory, day, do_combat, money = dev_comands(inventory, day, do_combat, money)
             else:  # error check
                 print("invalid input please use i for inventory or w for walking")
 
@@ -122,7 +132,7 @@ def task_selection():  # selects tasks
         day_start = False
 
 # Function called when player chooses attack
-def attack_player_first(attacker):
+def attack_player_first(attacker, money):
     enemy_health = random.randint(setting.enemies[attacker]["health minimum"], setting.enemies[attacker]["health maximum"])
     not_run = True
     while enemy_health > 0 and setting.current_health > 0 and not_run == True:
@@ -156,15 +166,18 @@ def attack_player_first(attacker):
             print(f"You beat them and have won {profit}")
             hp_gain = random.randint(20, 30)
             total_health = hp_gain + setting.current_health
+            money += profit #calculates new money
             if total_health <= setting.max_health:
                 setting.current_health += hp_gain
                 print(f"You gain {hp_gain} health, totaling {total_health}")
             elif total_health > setting.max_health:
                 setting.current_health = setting.max_health
                 print(f"Your health goes back to max, which is {setting.max_health}")
+            return money #sends new total back
+                
 
 # Function called when the player runs and fails
-def attack_enemy_first(attacker):
+def attack_enemy_first(attacker, money):
     # Enemy's attack
     enemy_health = random.randint(setting.enemies[attacker]["health minimum"], setting.enemies[attacker]["health maximum"])
     not_run = True
@@ -198,16 +211,18 @@ def attack_enemy_first(attacker):
             print(f"You beat them and have won {profit}")
             hp_gain = random.randint(20, 30)
             total_health = hp_gain + setting.current_health  # Defines health after health gain
+            money += profit #caclulated money total
             if total_health <= setting.max_health:  # Makes sure current health doesn't exceed max health
                 setting.current_health += hp_gain
                 print(f"You gain {hp_gain} health, totaling {total_health}")
             elif total_health > setting.max_health:  # If total health is greater than max health, sets health to max
                 setting.current_health = setting.max_health
                 print(f"Your health goes back to max, which is {setting.max_health}")
+            return money #sends new total back
 
                 
 def the_Great_Kanto_Earthquake(): #the final game code
-    print ("september 11th 1923")
+    print ("september 1st 1923")
     print ("today no one comes up to ask you somthing you decide to enjoy the day")
     print ("as you are cooking lunch over a fire it is around 11:59AM ")
     print ("you hear a rumbling")
@@ -246,11 +261,10 @@ def the_Great_Kanto_Earthquake(): #the final game code
 
 
 # driver
+print ("you wake up in your villa in Chiba Japan just as you have done almost evryday in you adult life you look over the mountain seeing the village down it is the 27th of augest a brand new day")
 name = input("hello adventurer welcome, now please tell me adventurer what is your name?:>")
 game_finished = False
 tutorial_question = input(f"{name} would you like to go through the tutorial y/n:>")
-money = 0
-do_combat = True
 if tutorial_question == "y":
     tutorial(name)
 main_game()

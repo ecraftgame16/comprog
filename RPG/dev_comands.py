@@ -1,28 +1,41 @@
 from seting import *
-from rpg import *
-def dev_comands():
+import sys
+def dev_comands(inventory, day, do_combat, money):
     print ("hello and welcome to the testing termanal")
     exit = False
     while exit == False:
-        comand = int(input ("""what varable would you like to change
-                1 exit dev commands
-                2 helth
-                3 max helth
-                4 inventory
-                5 disable combat
-                6 re enable combat
-                7 day:>"""))
+        try:
+            comand = int(input ("""what varable would you like to change
+                    1 exit dev commands
+                    2 helth
+                    3 max helth
+                    4 inventory
+                    5 disable combat
+                    6 re enable combat
+                    7 day
+                    8 money
+                    9 end:>"""))
+        except ValueError:
+            print("please insert a intager with nothing ealse")
         if comand == 1:
             exit = True
             print ("exiting dev commands")
         elif comand == 2:
-            old_health = 0
-            setting.current_health = old_health
-            setting.current_health = int(input(f"what is the new health must be below max_health which is {setting.max_health}:>"))
-            if setting.current_health > setting.max_health:
-                print (f"unable must be below max health whitch is {setting.max_health}")
+            # old_health = 0
+            # setting.current_health = old_health
+            try:
+                new_health = int(input(f"what is the new health must be below max_health which is {setting.max_health}:> "))
+                if new_health > setting.max_health:
+                    print(f"Unable must be below max health which is {setting.max_health}")
+                else:
+                    setting.current_health = new_health
+            except ValueError:
+                print("Please insert an integer nothing else")
         elif comand == 3:
-            setting.max_health = int(input("what would you like the max health to be:>"))
+            try:
+                setting.max_health = int(input("what would you like the max health to be:>"))
+            except ValueError:
+                print("please insert a integer nothing ealse")
             max_current = input("would you like to set current health to the new max health y/n:>")
             if max_current == "y":
                 setting.current_health = setting.max_health
@@ -47,4 +60,18 @@ def dev_comands():
         elif comand == 7:
             day_proposed = int(input("what day do you want up to 5"))
             if day_proposed <= 5:
-                day = 5
+                day = day_proposed
+            else:
+                print("no days past 5 days")
+        elif comand == 8:
+            try:
+                money = int(input("what will the players new money be (what ever number you enter is the total)"))
+            except ValueError:
+                print("please insert a integer nothing ealse")
+        elif comand == 9:
+            end_confermation = input("are you sure you want to end the program y/n:>")
+            if end_confermation == "y":
+                sys.exit()
+        else:
+            print("please insert a valid number")
+    return inventory, day, do_combat, money
