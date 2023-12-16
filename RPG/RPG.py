@@ -16,6 +16,7 @@ def main_game():
     money = 0
     day_start = True  # makes new day true for start of while loop
     day = 0
+    password_got = False
     while setting.current_health > 0 and game_finished == False:
         if day_start == True:
             day += 1
@@ -100,7 +101,15 @@ def main_game():
                 print(f"you have {money} current money")
                 print(f"your health is {setting.current_health}/{setting.max_health}")
             elif action == "dc":
-                inventory, day, do_combat, money = dev_comands(inventory, day, do_combat, money)
+                if password_got == True:
+                    inventory, day, do_combat, money, password_got = dev_comands(inventory, day, do_combat, money, password_got)
+                elif password_got == False:
+                    password_guess = input("what is the password for dev comands?")
+                    password_got = True
+                    if password_guess == setting.DEV_PASSWORD:
+                        inventory, day, do_combat, money, password_got = dev_comands(inventory, day, do_combat, money, password_got)
+                    else:
+                        print ("password incorect")
             else:  # error check
                 print("invalid input please use i for inventory or w for walking")
 

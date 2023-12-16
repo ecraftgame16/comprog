@@ -1,6 +1,7 @@
 class setting():
     max_health = 100
     current_health = 100
+    DEV_PASSWORD = "CATS"
     items_decoration = {
         "Mountain Landscape painting": {
             "description": "A beautiful painting of the Chiba mountainscape",

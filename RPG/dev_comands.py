@@ -1,6 +1,6 @@
 from seting import *
 import sys
-def dev_comands(inventory, day, do_combat, money):
+def dev_comands(inventory, day, do_combat, money, password_got):
     print ("hello and welcome to the testing termanal")
     exit = False
     while exit == False:
@@ -14,7 +14,8 @@ def dev_comands(inventory, day, do_combat, money):
                     6 re enable combat
                     7 day
                     8 money
-                    9 end:>"""))
+                    9 end
+                    10 lock dev consol behind password again:>"""))
         except ValueError:
             print("please insert a intager with nothing ealse")
         if comand == 1:
@@ -72,6 +73,8 @@ def dev_comands(inventory, day, do_combat, money):
             end_confermation = input("are you sure you want to end the program y/n:>")
             if end_confermation == "y":
                 sys.exit()
+        elif comand == 10:
+            password_got = False
         else:
             print("please insert a valid number")
-    return inventory, day, do_combat, money
+    return inventory, day, do_combat, money, password_got
