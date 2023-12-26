@@ -1,6 +1,6 @@
 from seting import *
 import sys
-def dev_comands(inventory, day, do_combat, money, password_got):
+def dev_comands(inventory, day, do_combat, money, password_got, waiting):
     print ("hello and welcome to the testing termanal")
     exit = False
     while exit == False:
@@ -15,7 +15,8 @@ def dev_comands(inventory, day, do_combat, money, password_got):
                     7 day
                     8 money
                     9 end
-                    10 lock dev consol behind password again:>"""))
+                    10 dissable waiting
+                    11 lock dev consol behind password again:>"""))
         except ValueError:
             print("please insert a intager with nothing ealse")
         if comand == 1:
@@ -44,9 +45,18 @@ def dev_comands(inventory, day, do_combat, money, password_got):
             print(f"current inventory = {inventory}")
             inventory_edit = True
             while inventory_edit == True:
-                new_item = input(f"what would you like to add {setting.items_decoration}")
+                new_item = input(f"""what would you like to add Decoration{setting.items_decoration} 
+                Defnese{setting.items_defense} 
+                Attack{setting.items_attack}
+                healing {setting.items_heal}""")
                 if new_item in setting.items_decoration:
                     inventory.append(setting.items_decoration[new_item])
+                elif new_item in setting.items_attack :
+                    inventory.append(setting.items_attack[new_item])
+                elif new_item in setting.items_defense :
+                    inventory.append(setting.items_defense[new_item])
+                elif new_item in setting.items_heal:
+                    inventory.append(setting.items_heal[new_item])
                 else:
                     print("no item named that found")
                 exit_invetory_loop = input("do you want to add more items to the inventory y/n:>")
@@ -74,7 +84,9 @@ def dev_comands(inventory, day, do_combat, money, password_got):
             if end_confermation == "y":
                 sys.exit()
         elif comand == 10:
+            waiting = False
+        elif comand == 11:
             password_got = False
         else:
             print("please insert a valid number")
-    return inventory, day, do_combat, money, password_got
+    return inventory, day, do_combat, money, password_got, waiting

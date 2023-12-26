@@ -6,7 +6,8 @@ from tasks import *
 from dev_comands import dev_comands
 from tutorial import tutorial
 
-
+#variables
+game_finished = False
 
 
 # game code
@@ -17,26 +18,29 @@ def main_game():
     day_start = True  # makes new day true for start of while loop
     day = 0
     password_got = False
+    waiting = True
     while setting.current_health > 0 and game_finished == False:
         if day_start == True:
             day += 1
             if day == 5:
-                the_Great_Kanto_Earthquake()
+                the_Great_Kanto_Earthquake(waiting)
             walked_times = 0
             arrived = False
             if day > 1:
                 setting.max_health += 50
             setting.current_health = setting.max_health
-            task_selection()
+            task_selection(waiting)
             accept = input(f"{name} will you take on this task y/n:>")
             if accept == "y":
                 day_start = False
             elif accept == "n":
                 print("you laze around for the day")
                 print("...")
-                time.sleep(10)
+                if waiting == True:
+                    time.sleep(10)
                 print("it is now the next day")
-                time.sleep(3)
+                if waiting == True:    
+                    time.sleep(3)
                 continue
             else:
                 print("please use y for yes and n for no")
@@ -49,9 +53,11 @@ def main_game():
                     elif accept == "n":
                         print("you laze around for the day")
                         print("...")
-                        time.sleep(10)
+                        if waiting == True:
+                            time.sleep(10)
                         print("it is now the next day")
-                        time.sleep(3)
+                        if waiting == True:
+                            time.sleep(3)
                         indecisive = False
         else:  # main functions
             # when player has walked between 10 - 20 times
@@ -97,23 +103,21 @@ def main_game():
                         else:
                             print("make sure you use a for atack and r for run")
             elif action == "i":  # runs inventory check
-                print(f"you have {inventory} in your inventory")
-                print(f"you have {money} current money")
-                print(f"your health is {setting.current_health}/{setting.max_health}")
+                inventory(inventory, money)
             elif action == "dc":
                 if password_got == True:
-                    inventory, day, do_combat, money, password_got = dev_comands(inventory, day, do_combat, money, password_got)
+                    inventory, day, do_combat, money, password_got, waiting = dev_comands(inventory, day, do_combat, money, password_got, waiting)
                 elif password_got == False:
                     password_guess = input("what is the password for dev comands?")
-                    password_got = True
                     if password_guess == setting.DEV_PASSWORD:
-                        inventory, day, do_combat, money, password_got = dev_comands(inventory, day, do_combat, money, password_got)
+                        password_got = True
+                        inventory, day, do_combat, money, password_got, waiting = dev_comands(inventory, day, do_combat, money, password_got, waiting)
                     else:
                         print ("password incorect")
             else:  # error check
                 print("invalid input please use i for inventory or w for walking")
 
-def task_selection():  # selects tasks
+def task_selection(waiting):  # selects tasks
     tasks_asked = []  # Keep track of asked tasks
     while True:
         task_number = random.randint(1, 5)
@@ -123,7 +127,8 @@ def task_selection():  # selects tasks
 
     # calling the tasks from tasks.py
     print("A local villager comes up to you and asks ...")
-    time.sleep(3)
+    if waiting == True:    
+        time.sleep(3)
     if task_number == 1:
         task_1(name)
         day_start = False
@@ -229,14 +234,40 @@ def attack_enemy_first(attacker, money):
                 print(f"Your health goes back to max, which is {setting.max_health}")
             return money #sends new total back
 
+def inventory(inventory, money, equeped_items):
+    print(f"you have {inventory} in your inventory")
+    print(f"you have {money} current money")
+    print(f"your health is {setting.current_health}/{setting.max_health}")
+    print(f"you curently have equieped{equeped_items}")
+    equip = input("would you like to equip an item y/n:>")
+    if equip == "y":
+        pass
+
+def item_efficetiveness(chosen_item, defense, attack):
+    if chosen_item in setting.items_attack:
+        new_attack = random.randint(setting.items_attack[chosen_item]["attack bounus min"], setting.items_attack[chosen_item]["attack bounus max"])
+        defense, attack, new_defense, new_attack = item_effects(defense, new_defense, attack, new_attack)
+    elif chosen_item in setting.items_defense:
+        new_defense = random.randint(setting.items_attack[chosen_item]["defense bounus min"], setting.items_attack[chosen_item]["defense bounus max"])
+        defense, attack, new_defense, new_attack = item_effects(defense, new_defense, attack, new_attack)
+    return defense, attack
+
+def item_effects(defense, new_defense, attack, new_attack):
+    if new_defense != 0:
+        defense = new_defense
+    if new_attack != 0:
+        attack = new_attack
+    return defense, attack, new_defense, new_attack
+
                 
-def the_Great_Kanto_Earthquake(): #the final game code
+def the_Great_Kanto_Earthquake(waiting): #the final game code
     print ("september 1st 1923")
     print ("today no one comes up to ask you somthing you decide to enjoy the day")
     print ("as you are cooking lunch over a fire it is around 11:59AM ")
     print ("you hear a rumbling")
     print ("...")
-    time.sleep(5)
+    if waiting == True:
+        time.sleep(5)
     print (f"""The ground shook violently, and {name} felt the villa shudder around them.
     In a matter of seconds, the once-steady mountain retreat became a perilous trap""")
     print (f"""With quick thinking, {name} attempted to escape the collapsing villa.
@@ -272,7 +303,6 @@ def the_Great_Kanto_Earthquake(): #the final game code
 # driver
 print ("you wake up in your villa in Chiba Japan just as you have done almost evryday in you adult life you look over the mountain seeing the village down it is the 27th of augest a brand new day")
 name = input("hello adventurer welcome, now please tell me adventurer what is your name?:>")
-game_finished = False
 tutorial_question = input(f"{name} would you like to go through the tutorial y/n:>")
 if tutorial_question == "y":
     tutorial(name)
