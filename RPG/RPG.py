@@ -19,6 +19,12 @@ def main_game():
     day = 0
     password_got = False
     waiting = True
+    defense = 0
+    extra_attack = 0
+    attack_equiped = False
+    defense_equiped = False
+    equiped_item_attack = ""
+    equiped_item_defense = ""
     while setting.current_health > 0 and game_finished == False:
         if day_start == True:
             day += 1
@@ -103,7 +109,7 @@ def main_game():
                         else:
                             print("make sure you use a for atack and r for run")
             elif action == "i":  # runs inventory check
-                inventory(inventory, money)
+                inventory_manegment(inventory, money, extra_attack, defense, attack_equiped, defense_equiped, equiped_item_attack, equiped_item_defense)
             elif action == "dc":
                 if password_got == True:
                     inventory, day, do_combat, money, password_got, waiting = dev_comands(inventory, day, do_combat, money, password_got, waiting)
@@ -234,30 +240,80 @@ def attack_enemy_first(attacker, money):
                 print(f"Your health goes back to max, which is {setting.max_health}")
             return money #sends new total back
 
-def inventory(inventory, money, equeped_items):
+def inventory_manegment(inventory, money, extra_attack, defense, attack_equiped, defense_equiped, equiped_item_attack, equiped_item_defense):
     print(f"you have {inventory} in your inventory")
     print(f"you have {money} current money")
     print(f"your health is {setting.current_health}/{setting.max_health}")
-    print(f"you curently have equieped{equeped_items}")
+    print(f"you curently have equieped{equiped_item_attack} for atacking and {equiped_item_defense} for your defense")
     equip = input("would you like to equip an item y/n:>")
     if equip == "y":
-        pass
+        chosen_item = input("what would you like to equip it must be an attack type or defense type")
+        if chosen_item in setting.items_defense:
+            if defense_equiped == True:
+                acknlodge = input("you allready have an item equiepd for defense would you like to equip a new item unequiping the other item y/n:>")
+                if acknlodge == "y":
+                    defense_attack = "defense"
+                    defense, extra_attack = unequip_item(defense, extra_attack, defense_attack)
+                    defense, extra_attack = item_efficetiveness(inventory, chosen_item, defense, extra_attack)
+                    print(f"{chosen_item} has been equiped")
+                elif acknlodge == "n":
+                    print("wont equip item leaving the other one equiped")
+            elif defense_equiped == False:
+                item_efficetiveness(inventory, chosen_item, defense, extra_attack)
+                print(f"{chosen_item} has been equiped")
+            elif attack_equiped == True:
+                acknlodge = input("you allready have an item equiepd for attack would you like to equip a new item unequiping the other item y/n:>")
+                if acknlodge == "y":
+                    defense_attack = "attack"
+                    defense, extra_attack = unequip_item(defense, extra_attack, defense_attack)
+                    defense, extra_attack, equiped_item_attack, equiped_item_defense = item_efficetiveness(inventory, chosen_item, defense, extra_attack, equiped_item_attack, equiped_item_defense)
+                    print(f"{chosen_item} has been equiped")
+                elif acknlodge == "n":
+                    print("wont equip item leaving the other one equiped")
+            elif attack_equiped == False:
+                defense, extra_attack, equiped_item_attack, equiped_item_defense = item_efficetiveness(inventory, chosen_item, defense, extra_attack, equiped_item_attack, equiped_item_defense)
+                print(f"{chosen_item} has been equiped")
+    elif equip == "n":
+        unequip_question = input("would you like to unequip an item y/n:>")
+        if unequip_question == "y":
+            which_item_unequip = input("which item would you like to unequip d for defense item a for attack item:>")
+            if which_item_unequip == "a":
+                defense_attack = "attack"
+                defense, extra_attack = unequip_item(defense, extra_attack, defense_attack)
+            elif which_item_unequip == "d":
+                defense_attack = "defense"
+                defense, extra_attack = unequip_item(defense, extra_attack, defense_attack)
 
-def item_efficetiveness(chosen_item, defense, attack):
-    if chosen_item in setting.items_attack:
-        new_attack = random.randint(setting.items_attack[chosen_item]["attack bounus min"], setting.items_attack[chosen_item]["attack bounus max"])
-        defense, attack, new_defense, new_attack = item_effects(defense, new_defense, attack, new_attack)
-    elif chosen_item in setting.items_defense:
-        new_defense = random.randint(setting.items_attack[chosen_item]["defense bounus min"], setting.items_attack[chosen_item]["defense bounus max"])
-        defense, attack, new_defense, new_attack = item_effects(defense, new_defense, attack, new_attack)
-    return defense, attack
 
-def item_effects(defense, new_defense, attack, new_attack):
+def item_efficetiveness(inventory, chosen_item, defense, extra_attack, equiped_item_attack, equiped_item_defense):
+    if chosen_item in setting.items_attack and chosen_item in inventory:
+        new_attack = random.randint(setting.items_attack[chosen_item]["attack_bonus_min"], setting.items_attack[chosen_item]["attack_bonus_max"])
+        defense, extra_attack, new_defense, new_attack = item_effects(defense, new_defense, extra_attack, new_attack)
+        equiped_item_attack = chosen_item
+    elif chosen_item in setting.items_defense and chosen_item in inventory:
+        new_defense = random.randint(setting.items_defense[chosen_item]["defense_bonus_min"], setting.items_defense[chosen_item]["defense_bonus_max"])
+        defense, extra_attack, new_defense, new_attack = item_effects(defense, new_defense, extra_attack, new_attack)
+        equiped_item_defense = chosen_item
+    else:
+        print("Either the item does not exist or it is not in your inventory. Here is your current inventory")
+        print(inventory)
+    return defense, extra_attack, equiped_item_attack, equiped_item_defense
+
+def item_effects(defense, new_defense, extra_attack, new_attack):
     if new_defense != 0:
         defense = new_defense
     if new_attack != 0:
-        attack = new_attack
-    return defense, attack, new_defense, new_attack
+        extra_attack = new_attack
+    new_defense = 0
+    new_attack = 0
+    return defense, extra_attack, new_defense, new_attack
+
+def unequip_item(defense, extra_attack, defense_attack):
+    if defense_attack == "attack":
+        extra_attack = 0
+    if defense_attack == "defense":
+        defense = 0
+    return defense, extra_attack
 
                 
 def the_Great_Kanto_Earthquake(waiting): #the final game code

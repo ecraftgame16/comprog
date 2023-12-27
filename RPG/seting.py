@@ -61,8 +61,8 @@ class setting():
             "description" : """This is a beautifully crafted katana, once wielded by a legendary samurai of the Chiba region.
             It is known for its sharpness and durability, with intricate designs on the hilt representing the local history and mythology. 
             When used in combat, it strikes with precision and power reflective of the samurai's skill.""",
-            "attack bonus min" : 10,
-            "atack bonus max" : 50,
+            "attack_bonus_min" : 10,
+            "attack_bonus_max" : 50,
             "cost" : 100,
             "type" : "attack"
         },
@@ -75,8 +75,8 @@ class setting():
             "discription" : """A sturdy shield made from tightly woven bamboo and blessed by monks from a local temple.
             It's surprisingly light yet effective against various attacks. The shield is adorned with symbols and prayers for protection, 
             invoking the spiritual strength of the mountains and forests surrounding Chiba.""",
-            "defense bonus min" : 15,
-            "defense bouns max" : 30,
+            "defense_bonus_min" : 15,
+            "defense_bouns_max" : 30,
             "cost" : 150,
             "type" : "defense"
         }

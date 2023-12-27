@@ -48,17 +48,21 @@ def dev_comands(inventory, day, do_combat, money, password_got, waiting):
                 Attack{setting.items_attack}
                 healing {setting.items_heal}""")
                 if new_item in setting.items_decoration:
+                    inventory.append(new_item)
                     inventory.append(setting.items_decoration[new_item])
                 elif new_item in setting.items_attack :
+                    inventory.append(new_item)
                     inventory.append(setting.items_attack[new_item])
                 elif new_item in setting.items_defense :
+                    inventory.append(new_item)
                     inventory.append(setting.items_defense[new_item])
                 elif new_item in setting.items_heal:
+                    inventory.append(new_item)
                     inventory.append(setting.items_heal[new_item])
                 else:
                     print("no item named that found")
                 exit_invetory_loop = input("do you want to add more items to the inventory y/n:>")
-                if exit_invetory_loop == "y":
+                if exit_invetory_loop == "n":
                     inventory_edit = False
                     print("exiting inventory editor")
         elif comand == 5:
