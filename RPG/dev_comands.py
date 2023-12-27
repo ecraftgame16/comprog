@@ -23,8 +23,6 @@ def dev_comands(inventory, day, do_combat, money, password_got, waiting):
             exit = True
             print ("exiting dev commands")
         elif comand == 2:
-            # old_health = 0
-            # setting.current_health = old_health
             try:
                 new_health = int(input(f"what is the new health must be below max_health which is {setting.max_health}:> "))
                 if new_health > setting.max_health:
