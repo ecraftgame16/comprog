@@ -95,7 +95,7 @@ def main_game():
                         run_attack = input("would you like to try and run - r or attack - a:>")  # asks if player wants to run or attack
                         if run_attack == "a":
                             attack_dicision = False
-                            money = attack_player_first(attacker, money)  # calls attack where player attacks first since they chose attack
+                            money = attack_player_first(attacker, money, extra_attack, defense)  # calls attack where player attacks first since they chose attack
                         elif run_attack == "r":
                             success = random.randint(1, 50)
                             if success % 2 == 0:  # checks if player ran away successfully
@@ -105,11 +105,11 @@ def main_game():
                             else:  # if player didn't run away successfully tells player and calls the enemy attacking first
                                 attack_dicision = False
                                 print("you couldn't run away")
-                                money = attack_enemy_first(attacker, money)
+                                money = attack_enemy_first(attacker, money, extra_attack, defense)
                         else:
                             print("make sure you use a for atack and r for run")
             elif action == "i":  # runs inventory check
-                inventory_manegment(inventory, money, extra_attack, defense, attack_equiped, defense_equiped, equiped_item_attack, equiped_item_defense)
+                defense, extra_attack = inventory_manegment(inventory, money, extra_attack, defense, attack_equiped, defense_equiped, equiped_item_attack, equiped_item_defense)
             elif action == "dc":
                 if password_got == True:
                     inventory, day, do_combat, money, password_got, waiting = dev_comands(inventory, day, do_combat, money, password_got, waiting)
@@ -152,7 +152,7 @@ def task_selection(waiting):  # selects tasks
         day_start = False
 
 # Function called when player chooses attack
-def attack_player_first(attacker, money):
+def attack_player_first(attacker, money, extra_attack, defense):
     enemy_health = random.randint(setting.enemies[attacker]["health minimum"], setting.enemies[attacker]["health maximum"])
     not_run = True
     while enemy_health > 0 and setting.current_health > 0 and not_run == True:
@@ -161,6 +161,7 @@ def attack_player_first(attacker, money):
             run_attack = input("Would you like to attack or run away? a - attack, r - run:>")
             if run_attack == "a":
                 hero_damage = random.randint(30,60)
+                hero_damage += extra_attack
                 enemy_health -= hero_damage
                 print(f"You do {hero_damage} damage")
             elif run_attack == "r":
@@ -174,6 +175,7 @@ def attack_player_first(attacker, money):
         # Enemy's attack
         if enemy_health > 0 and not_run == True:
             enemy_damage = random.randint(setting.enemies[attacker]["damage minimum"], setting.enemies[attacker]["damage maximum"])
+            enemy_damage -= defense
             print(f"You got hit and took {enemy_damage} damage")
             setting.current_health -= enemy_damage
 
@@ -197,13 +199,14 @@ def attack_player_first(attacker, money):
                 
 
 # Function called when the player runs and fails
-def attack_enemy_first(attacker, money):
+def attack_enemy_first(attacker, money, extra_attack, defense):
     # Enemy's attack
     enemy_health = random.randint(setting.enemies[attacker]["health minimum"], setting.enemies[attacker]["health maximum"])
     not_run = True
     while enemy_health > 0 and setting.current_health > 0 and not_run == True:
         if enemy_health > 0 and not_run == True:
             enemy_damage = random.randint(setting.enemies[attacker]["damage minimum"], setting.enemies[attacker]["damage maximum"])
+            enemy_damage -= defense
             print(f"You got hit and took {enemy_damage} damage")
             setting.current_health -= enemy_damage
         
@@ -212,6 +215,7 @@ def attack_enemy_first(attacker, money):
             run_attack = input("Would you like to attack or run away? a - attack, r - run:>")
             if run_attack == "a":
                 hero_damage = random.randint(20,40)
+                hero_damage += extra_attack
                 enemy_health -= hero_damage
                 print(f"You do {hero_damage} damage")
             elif run_attack == "r":
@@ -259,7 +263,7 @@ def inventory_manegment(inventory, money, extra_attack, defense, attack_equiped,
                 elif acknlodge == "n":
                     print("wont equip item leaving the other one equiped")
             elif defense_equiped == False:
-                item_efficetiveness(inventory, chosen_item, defense, extra_attack)
+                item_efficetiveness(inventory, chosen_item, defense, extra_attack, equiped_item_attack, equiped_item_defense)
                 print(f"{chosen_item} has been equiped")
             elif attack_equiped == True:
                 acknlodge = input("you allready have an item equiepd for attack would you like to equip a new item unequiping the other item y/n:>")
@@ -283,15 +287,18 @@ def inventory_manegment(inventory, money, extra_attack, defense, attack_equiped,
             elif which_item_unequip == "d":
                 defense_attack = "defense"
                 defense, extra_attack = unequip_item(defense, extra_attack, defense_attack)
+    return defense, extra_attack
 
 
 def item_efficetiveness(inventory, chosen_item, defense, extra_attack, equiped_item_attack, equiped_item_defense):
     if chosen_item in setting.items_attack and chosen_item in inventory:
         new_attack = random.randint(setting.items_attack[chosen_item]["attack_bonus_min"], setting.items_attack[chosen_item]["attack_bonus_max"])
+        new_defense = 0
         defense, extra_attack, new_defense, new_attack = item_effects(defense, new_defense, extra_attack, new_attack)
         equiped_item_attack = chosen_item
     elif chosen_item in setting.items_defense and chosen_item in inventory:
         new_defense = random.randint(setting.items_defense[chosen_item]["defense_bonus_min"], setting.items_defense[chosen_item]["defense_bonus_max"])
+        new_attack = 0
         defense, extra_attack, new_defense, new_attack = item_effects(defense, new_defense, extra_attack, new_attack)
         equiped_item_defense = chosen_item
     else:
@@ -302,8 +309,10 @@ def item_efficetiveness(inventory, chosen_item, defense, extra_attack, equiped_i
 def item_effects(defense, new_defense, extra_attack, new_attack):
     if new_defense != 0:
         defense = new_defense
+        new_attack = 0
     if new_attack != 0:
         extra_attack = new_attack
+        new_defense = 0
     new_defense = 0
     new_attack = 0
     return defense, extra_attack, new_defense, new_attack

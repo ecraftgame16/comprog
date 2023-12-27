@@ -76,7 +76,7 @@ class setting():
             It's surprisingly light yet effective against various attacks. The shield is adorned with symbols and prayers for protection, 
             invoking the spiritual strength of the mountains and forests surrounding Chiba.""",
             "defense_bonus_min" : 15,
-            "defense_bouns_max" : 30,
+            "defense_bonus_max" : 30,
             "cost" : 150,
             "type" : "defense"
         }
