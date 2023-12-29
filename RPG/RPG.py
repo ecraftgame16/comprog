@@ -107,7 +107,7 @@ def main_game():
                                 print("you couldn't run away")
                                 money = attack_enemy_first(attacker, money, extra_attack, defense)
                         else:
-                            print("make sure you use a for atack and r for run")
+                            print("make sure you use a for attack and r for run")
             elif action == "i":  # runs inventory check
                 defense, extra_attack = inventory_manegment(inventory, money, extra_attack, defense, attack_equiped, defense_equiped, equiped_item_attack, equiped_item_defense)
             elif action == "dc":
@@ -287,6 +287,10 @@ def inventory_manegment(inventory, money, extra_attack, defense, attack_equiped,
             elif which_item_unequip == "d":
                 defense_attack = "defense"
                 defense, extra_attack = unequip_item(defense, extra_attack, defense_attack)
+        elif unequip_question == "n":
+            healing_question = input("Would you like to use a healing item?y/n:>")
+            if healing_question == "y":
+                healing_func(inventory)
     return defense, extra_attack
 
 
@@ -324,6 +328,44 @@ def unequip_item(defense, extra_attack, defense_attack):
         defense = 0
     return defense, extra_attack
 
+def healing_func(inventory):
+    try:
+        heal_type = int(input("""would you like to use a small medium or large heal pack
+                            1 small
+                            2 medium
+                            3 large"""))
+    except ValueError:
+        print("invalid input please make sure you only have a 1 2 or 3")
+    else:
+        if heal_type == 1:
+            healing_box = "small_heal_pack"
+        elif heal_type == 2:
+            healing_box = "medium_heal_pack"
+        elif heal_type == 3:
+            healing_box = "large_heal_pack"
+        else:
+            print("please make sure the input is eather 1 2 or 3")
+            return
+        if healing_box in inventory:
+            extra_health = random.randint(setting.items_heal[healing_box]["healing power min"], setting.items_heal[healing_box]["healing power max"])
+            if setting.current_health == setting.max_health:
+                print("you are allready at max health which you cannot exceed")
+            elif setting.current_health + extra_health >= setting.max_health:
+                are_you_sure_question = input(f"using this heal would bring you above or equal to max health your curent health is {setting.current_health} and the max is {setting.max_health} this heal pack would heal you {extra_health} y/n:>")
+                if are_you_sure_question == "y":
+                    setting.current_health = setting.max_health
+                    inventory.remove(healing_box)
+                    inventory.remove(setting.items_heal[healing_box])
+            else:
+                setting.current_health += extra_health
+                print(f"you have been heald {extra_health} much totaling {setting.current_health} out of a max of {setting.max_health}")
+                inventory.remove(healing_box)
+                inventory.remove(setting.items_heal[healing_box])
+        else:
+            print("you dont have that healing box in your inventory hear is your inventory again")
+            print(inventory)
+
+
                 
 def the_Great_Kanto_Earthquake(waiting): #the final game code
     print ("september 1st 1923")
@@ -345,7 +387,7 @@ def the_Great_Kanto_Earthquake(waiting): #the final game code
     this unforeseen disaster claimed their life.""")
     print (f"""When the earthquake subsided, 
     the villagers in the valley below noticed a plume of smoke rising from the mountainside. 
-    Fearing the worst, they quickly formed search parties and ascended the mountain to MC's villa. 
+    Fearing the worst, they quickly formed search parties and ascended the mountain to {name}'s villa. 
     Upon arrival, they were met with a heartbreaking sight - the villa, {name} beloved home, was reduced to ashes.""")
     print (f"""The entire village mourned the loss of {name}. 
     They remembered the adventurer not only for their heroic deeds but also for the quiet moments 

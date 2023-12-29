@@ -85,6 +85,28 @@ class setting():
     l_defense_items = list(items_defense)
 
     items_heal = {
+        "small_heal_pack" : {
+            "discription" : "a small medical pack for dresing small wounds",
+            "healing power min" : 5,
+            "healing power max" : 10,
+            "cost" : 50,
+            "type" : "healing"
+        },
+        "medium_heal_pack" : {
+            "discription" : "a mediaum size medical pack for helping some more serious wounds.",
+            "healing power min" : 10,
+            "healing power max" : 15,
+            "cost" : 100,
+            "type" : "healing"
+        },
+        "large_heal_pack" : {
+            "discription" : "a large medical pack for healing major woulds",
+            "healing power min" : 15,
+            "healing power max" : 20,
+            "cost" : 150,
+            "type" : "healing"
+        }
+
 
     }
 
