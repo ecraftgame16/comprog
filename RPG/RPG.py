@@ -14,7 +14,7 @@ game_finished = False
 def main_game():
     inventory = []
     do_combat = True
-    money = 0
+    money = 10
     day_start = True  # makes new day true for start of while loop
     day = 0
     password_got = False
@@ -48,6 +48,9 @@ def main_game():
                 if waiting == True:    
                     time.sleep(3)
                 continue
+            test = input ("shop y/n") #debug
+            if test == "y":
+                shop(inventory, money)
             else:
                 print("please use y for yes and n for no")
                 indecisive = True
@@ -77,7 +80,7 @@ def main_game():
             elif walked_times >= requierd_walk_times and arrived == True:
                 print("we made it home finally")
                 day_start = True
-                new_item = random.choice(setting.lDecorationItems)
+                new_item = random.choice(setting.l_decoration_items)
                 inventory.append(new_item)
                 inventory.append(setting.items_decoration[new_item])
                 continue
@@ -365,7 +368,126 @@ def healing_func(inventory):
             print("you dont have that healing box in your inventory hear is your inventory again")
             print(inventory)
 
+def shop(inventory, money):
+    print("hello adventrure, welcome to the shop")
+    healing_gen = []
+    attack_gen = []
+    defense_gen = []
+    decoration_gen = []
+    healing_gen, attack_gen, defense_gen, decoration_gen = shop_generation(healing_gen, attack_gen, defense_gen, decoration_gen)
+    shop_loop = True
+    while shop_loop == True:
+        try:
+            shop_action = int(input("""what would you like to do
+                                    1 sell your items
+                                    2 buy some items
+                                    3 leave the store"""))
+        except ValueError:
+            print("please make sure you enter a 1, 2, or 3 and nothing elase")
+        else:
+            if shop_action == 1:
+                inventory, money = selling_your_items(inventory, money)
+            elif shop_action == 2:
+                inventory, money = buying_items(inventory, money)
+            elif shop_action == 3:
+                shop_loop = False
+        return inventory, money
 
+def shop_generation(healing_gen, attack_gen, defense_gen, decoration_gen):
+    filled = False
+    while filled == False:
+        item_attack = random.choice(setting.l_attack_items)
+        if item_attack not in attack_gen:
+            attack_gen.append(item_attack)
+        if len(attack_gen) == 3:
+            filled = True
+    filled = False
+    while filled == False:
+        items_defense = random.choice(setting.l_defense_items)
+        if items_defense not in defense_gen:
+            defense_gen.append(items_defense)
+        if len(defense_gen) == 3:
+            filled = True
+    filled = False
+    while filled == False:
+        items_heal = random.choice(setting.l_healing_items)
+        if items_heal not in healing_gen:
+            healing_gen.append(items_heal)
+        if len(healing_gen) == 3:
+            filled = True
+    filled = False
+    while filled == False:
+        items_decoration = random.choice(setting.l_decoration_items)
+        if items_decoration not in decoration_gen:
+            decoration_gen.append(items_decoration)
+        if len(decoration_gen) == 3:
+            filled = True
+    return healing_gen, attack_gen, defense_gen, decoration_gen
+
+def selling_your_items(inventory, money):
+    # money = old_money
+    print("""shopkeeper:
+                        I see you are intrested in selling something to me.""")
+    print(inventory)
+    item_sold = input("what would you like to offer?:>")
+    if item_sold in inventory:
+        if item_sold in setting.items_attack:
+            loss = random.randint(1,5)
+            original_cost = setting.items_attack[item_sold]["cost"]
+            offered_price = original_cost // loss
+            item_type = "attack"
+        elif item_sold in setting.items_defense:
+            loss = random.randint(1,5)
+            original_cost = setting.items_defense[item_sold]["cost"]
+            offered_price = original_cost // loss
+            item_type = "defense"
+        elif item_sold in setting.items_heal:
+            loss = random.randint(1,5)
+            original_cost = setting.items_heal[item_sold]["cost"]
+            offered_price = original_cost // loss
+            item_type = "heal"
+        elif item_sold in setting.items_decoration:
+            loss = random.randint(1,5)
+            original_cost = setting.items_decoration[item_sold]["cost"]
+            offered_price = original_cost // loss
+            item_type = "decoration"
+        else:
+            print("unable to find item")
+            # old_money = money
+            return inventory, money
+        
+        confirmation = input(f"""shopkeeper:
+                                    i will offer you this at a price of {offered_price} 
+                                    you think to your self you bought this for {original_cost}
+                                shopkeeper:
+                                    will you accept my offer? y/n:>""")
+        decide = True
+        while decide == True:
+            if confirmation == "y":
+                money += offered_price
+                inventory.remove(item_sold)
+                if item_type == "attack":
+                    inventory.remove(setting.items_attack[item_sold])
+                if item_type == "defense":
+                    inventory.remove(setting.items_defense[item_sold])
+                if item_type == "heal":
+                    inventory.remove(setting.items_heal[item_sold])
+                if item_type == "decoration":
+                    inventory.remove(setting.items_decoration[item_sold])
+                decide = False
+            elif confirmation == "n":
+                print("you turn the shop keeper down")
+                decide = False
+            else:
+                print("please make sure you input y for yes and n for no lowercase")
+        return inventory, money
+
+    else:
+        print("item not in inventory")
+        return inventory, money
+
+def buying_items(inventory, money):
+    pass
                 
 def the_Great_Kanto_Earthquake(waiting): #the final game code
     print ("september 1st 1923")
@@ -409,6 +531,7 @@ def the_Great_Kanto_Earthquake(waiting): #the final game code
 
 # driver
 print ("you wake up in your villa in Chiba Japan just as you have done almost evryday in you adult life you look over the mountain seeing the village down it is the 27th of augest a brand new day")
+print ("you recently lost most of your money gambling and you are left with a mesly 10 coins")
 name = input("hello adventurer welcome, now please tell me adventurer what is your name?:>")
 tutorial_question = input(f"{name} would you like to go through the tutorial y/n:>")
 if tutorial_question == "y":

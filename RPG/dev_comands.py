@@ -16,7 +16,8 @@ def dev_comands(inventory, day, do_combat, money, password_got, waiting):
                     8 money
                     9 end
                     10 dissable waiting
-                    11 lock dev consol behind password again:>"""))
+                    11 enable waiting
+                    12 lock dev consol behind password again:>"""))
         except ValueError:
             print("please insert a intager with nothing ealse")
         if comand == 1:
@@ -70,10 +71,12 @@ def dev_comands(inventory, day, do_combat, money, password_got, waiting):
             print ("combat is now dissabled")
         elif comand == 6:
             do_combat = True
+            print ("combat is now enabled")
         elif comand == 7:
             day_proposed = int(input("what day do you want up to 5"))
             if day_proposed <= 5:
                 day = day_proposed
+                print(f"day is now {day}")
             else:
                 print("no days past 5 days")
         elif comand == 8:
@@ -87,8 +90,13 @@ def dev_comands(inventory, day, do_combat, money, password_got, waiting):
                 sys.exit()
         elif comand == 10:
             waiting = False
+            print("all waiting is disabled")
         elif comand == 11:
+            waiting = True
+            print ("all waiting is re enabled")
+        elif comand == 12:
             password_got = False
+            print("the dev console is now locked behind a password again")
         else:
             print("please insert a valid number")
     return inventory, day, do_combat, money, password_got, waiting
