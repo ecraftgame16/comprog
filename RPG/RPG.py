@@ -48,9 +48,6 @@ def main_game():
                 if waiting == True:    
                     time.sleep(3)
                 continue
-            test = input ("shop y/n") #debug
-            if test == "y":
-                shop(inventory, money)
             else:
                 print("please use y for yes and n for no")
                 indecisive = True
@@ -84,6 +81,9 @@ def main_game():
                 inventory.append(new_item)
                 inventory.append(setting.items_decoration[new_item])
                 continue
+            test = input ("shop y/n") #debug temp shop access
+            if test == "y": #debug temp shop access
+                inventory, money = shop(inventory, money) #debug temp shop access
             action = input("""what would you like to do w - walk i - inventory:>""")
             # makes walking work and calls attacks
             if action == "w":
@@ -115,12 +115,12 @@ def main_game():
                 defense, extra_attack = inventory_manegment(inventory, money, extra_attack, defense, attack_equiped, defense_equiped, equiped_item_attack, equiped_item_defense)
             elif action == "dc":
                 if password_got == True:
-                    inventory, day, do_combat, money, password_got, waiting = dev_comands(inventory, day, do_combat, money, password_got, waiting)
+                    inventory, day, do_combat, money, password_got, waiting = dev_comands(inventory, day, do_combat, money, password_got, waiting, tutorial, name)
                 elif password_got == False:
                     password_guess = input("what is the password for dev comands?")
                     if password_guess == setting.DEV_PASSWORD:
                         password_got = True
-                        inventory, day, do_combat, money, password_got, waiting = dev_comands(inventory, day, do_combat, money, password_got, waiting)
+                        inventory, day, do_combat, money, password_got, waiting = dev_comands(inventory, day, do_combat, money, password_got, waiting, tutorial, name)
                     else:
                         print ("password incorect")
             else:  # error check
@@ -381,17 +381,17 @@ def shop(inventory, money):
             shop_action = int(input("""what would you like to do
                                     1 sell your items
                                     2 buy some items
-                                    3 leave the store"""))
+                                    3 leave the store:>"""))
         except ValueError:
             print("please make sure you enter a 1, 2, or 3 and nothing elase")
         else:
             if shop_action == 1:
                 inventory, money = selling_your_items(inventory, money)
             elif shop_action == 2:
-                inventory, money = buying_items(inventory, money)
+                inventory, money, healing_gen, attack_gen, defense_gen, decoration_gen = buying_items(inventory, money, healing_gen, attack_gen, defense_gen, decoration_gen)
             elif shop_action == 3:
                 shop_loop = False
-        return inventory, money
+    return inventory, money
 
 def shop_generation(healing_gen, attack_gen, defense_gen, decoration_gen):
     filled = False
@@ -486,8 +486,161 @@ def selling_your_items(inventory, money):
         print("item not in inventory")
         return inventory, money
 
-def buying_items(inventory, money):
-    pass
+def buying_items(inventory, money, healing_gen, attack_gen,defense_gen,decoration_gen):
+    print(""" Shopkeeper:
+                        I see you would like to buy something.""")
+    print (f"attack type {attack_gen}")
+    print (f"defense type {defense_gen}")
+    print (f"healing type {healing_gen}")
+    print (f"decoration type {decoration_gen}")
+    try:
+        buy_type = int(input("""what type of item would you like to buy
+                        1 attack
+                        2 defense
+                        3 healing
+                        4 decoration:>"""))
+    except ValueError:
+        print("please ensure your input is a nuber 1 2 3 or 4 note there shouledt be anything like a space or anything")
+    else:
+        bought_item = ""
+        if buy_type == 1:
+            item_details = input("would you like to see more details for an item y/n?:>")
+            if item_details == "y":
+                item_cheack = input("which item would you like to see the details of:>")
+                if item_cheack in setting.items_attack:
+                    print(setting.items_attack[item_cheack])
+                else:
+                    print("item not found please try again")
+                    return
+                item_buy = input("would you like to buy the item y/n:>")
+                if item_buy == "y":
+                    buy_script = True
+                    bought_item = item_cheack
+                elif item_buy == "n":
+                    buy_script = False
+            elif item_details == "n":
+                buy_script = True
+            else:
+                print("error, invalid input please ensure you only enter y for yes n for no")
+                return
+            if buy_script == True:
+                if bought_item == "":
+                    bought_item = input("what would you like to buy:>")
+                if bought_item in attack_gen:
+                    if money >= setting.items_attack[bought_item]["cost"]:
+                        inventory.append(bought_item)
+                        inventory.append(setting.items_attack[bought_item])
+                        attack_gen.remove(bought_item)
+                        money -= setting.items_attack[bought_item]["cost"]
+                        print(f"you have succesfully bought {bought_item}")
+                    elif money < setting.items_attack[bought_item]["cost"]:
+                        print("you do not have enough money for this object")
+                else:
+                    print("item not avaible") 
+        elif buy_type == 2:
+            item_details = input("would you like to see more details for an item y/n?:>")
+            if item_details == "y":
+                item_cheack = input("which item would you like to see the details of:>")
+                if item_cheack in setting.items_defense:
+                    print(setting.items_defense[item_cheack])
+                else:
+                    print("item not found please try again")
+                    return
+                item_buy = input("would you like to buy the item y/n:>")
+                if item_buy == "y":
+                    buy_script = True
+                    bought_item = item_cheack
+                elif item_buy == "n":
+                    buy_script = False
+            elif item_details == "n":
+                buy_script = True
+            else:
+                print("error, invalid input please ensure you only enter y for yes n for no")
+                return
+            if buy_script == True:
+                if bought_item == "":
+                    bought_item = input("what would you like to buy:.")
+                if bought_item in defense_gen:
+                    if money >= setting.items_defense[bought_item]["cost"]:
+                        inventory.append(bought_item)
+                        inventory.append(setting.items_defense[bought_item])
+                        defense_gen.remove(bought_item)
+                        money -= setting.items_defense[bought_item]["cost"]
+                        print(f"you have succesfully bought {bought_item}")
+                    elif money < setting.items_defense[bought_item]["cost"]:
+                        print("you do not have enough money for this object")
+                else:
+                    print("item not avaible") 
+        elif buy_type == 3:
+            item_details = input("would you like to see more details for an item y/n?:>")
+            if item_details == "y":
+                item_cheack = input("which item would you like to see the details of:>")
+                if item_cheack in setting.items_heal:
+                    print(setting.items_heal[item_cheack])
+                else:
+                    print("item not found please try again")
+                    return
+                item_buy = input("would you like to buy the item y/n:>")
+                if item_buy == "y":
+                    buy_script = True
+                    bought_item = item_cheack
+                elif item_buy == "n":
+                    buy_script = False
+            elif item_details == "n":
+                buy_script = True
+            else:
+                print("error, invalid input please ensure you only enter y for yes n for no")
+                return
+            if buy_script == True:
+                if bought_item == "":
+                    bought_item = input("what would you like to buy:>")
+                if bought_item in healing_gen:
+                    if money >= setting.items_heal[bought_item]["cost"]:
+                        inventory.append(bought_item)
+                        inventory.append(setting.items_heal[bought_item])
+                        healing_gen.remove(bought_item)
+                        money -= setting.items_heal[bought_item]["cost"]
+                        print(f"you have succesfully bought {bought_item}")
+                    elif money < setting.items_heal[bought_item]["cost"]:
+                        print("you do not have enough money for this object")
+                else:
+                    print("item not avaible") 
+        elif buy_type == 4:
+            item_details = input("would you like to see more details for an item y/n?:>")
+            if item_details == "y":
+                item_cheack = input("which item would you like to see the details of:>")
+                if item_cheack in setting.items_decoration:
+                    print(setting.items_decoration[item_cheack])
+                else:
+                    print("item not found please try again")
+                    return
+                item_buy = input("would you like to buy the item y/n:>")
+                if item_buy == "y":
+                    buy_script = True
+                    bought_item = item_cheack
+                elif item_buy == "n":
+                    buy_script = False
+            elif item_details == "n":
+                buy_script = True
+            else:
+                print("error, invalid input please ensure you only enter y for yes n for no")
+                return
+            if buy_script == True:
+                if bought_item == "":
+                    bought_item = input("what would you like to buy:>")
+                if bought_item in decoration_gen:
+                    if money >= setting.items_decoration[bought_item]["cost"]:
+                        inventory.append(bought_item)
+                        inventory.append(setting.items_decoration[bought_item])
+                        decoration_gen.remove(bought_item)
+                        money -= setting.items_decoration[bought_item]["cost"]
+                        print(f"you have succesfully bought {bought_item}")
+                    elif money < setting.items_decoration[bought_item]["cost"]:
+                        print("you do not have enough money for this object")
+                else:
+                    print("item not avaible")
+    return inventory, money, healing_gen, attack_gen, defense_gen, decoration_gen
+
                 
 def the_Great_Kanto_Earthquake(waiting): #the final game code
     print ("september 1st 1923")

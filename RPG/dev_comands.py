@@ -1,6 +1,6 @@
 from seting import *
 import sys
-def dev_comands(inventory, day, do_combat, money, password_got, waiting):
+def dev_comands(inventory, day, do_combat, money, password_got, waiting, tutorial, name):
     print ("hello and welcome to the testing termanal")
     exit = False
     while exit == False:
@@ -14,10 +14,11 @@ def dev_comands(inventory, day, do_combat, money, password_got, waiting):
                     6 re enable combat
                     7 day
                     8 money
-                    9 end
-                    10 dissable waiting
-                    11 enable waiting
-                    12 lock dev consol behind password again:>"""))
+                    9 run tutorial
+                    10 end
+                    11 dissable waiting
+                    12 enable waiting
+                    13 lock dev consol behind password again:>"""))
         except ValueError:
             print("please insert a intager with nothing ealse")
         if comand == 1:
@@ -85,16 +86,19 @@ def dev_comands(inventory, day, do_combat, money, password_got, waiting):
             except ValueError:
                 print("please insert a integer nothing ealse")
         elif comand == 9:
+            print("runing tutorial")
+            tutorial(name)
+        elif comand == 10:
             end_confermation = input("are you sure you want to end the program y/n:>")
             if end_confermation == "y":
                 sys.exit()
-        elif comand == 10:
+        elif comand == 11:
             waiting = False
             print("all waiting is disabled")
-        elif comand == 11:
+        elif comand == 12:
             waiting = True
             print ("all waiting is re enabled")
-        elif comand == 12:
+        elif comand == 13:
             password_got = False
             print("the dev console is now locked behind a password again")
         else:

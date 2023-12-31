@@ -15,10 +15,13 @@ def tutorial(name):
     print("Then the game will ask you if you will accept this task. This time, let's accept the task.")
     task = True
     while task:
-        task_acceptance = input(f"{name}, will you accept this task y/n:>")
+        task_acceptance = input(f"{name}, will you accept this task y/n or e for exit:>")
         if task_acceptance == "y":
             print("Alright, let's go on our adventure.")
             task = False
+        elif task_acceptance == "e":
+            print("exiting tutorial")
+            return
         else:
             print("Please accept the task.")
     print("Alright, we have accepted the task. Next up is to start going.")
@@ -26,7 +29,7 @@ def tutorial(name):
     print("The game will ask if you would like to walk - w or check inventory - i in the prompt following this. Let's open our inventory.")
     inventory = True
     while inventory:
-        inventoryPrompt = input("What would you like to do? w - walk, i - inventory:>")
+        inventoryPrompt = input("What would you like to do? w - walk, i - inventory e - exit:>")
         if inventoryPrompt == "i":
             print("You have [] in your inventory.")
             print("You have 0 current money.")
@@ -34,6 +37,9 @@ def tutorial(name):
             inventory = False
         elif inventoryPrompt == "w":
             print("Please select i.")
+        elif inventoryPrompt == "e":
+            print("exiting totrial")
+            return
         else:
             print("Make sure you only select i, nothing else.")
     print("Now let's go on our task. This time, let's press w in the prompt.")
@@ -54,12 +60,15 @@ def tutorial(name):
     print("Let's run this time; I don't like our chances 3 against 1.")
     run1 = True
     while run1:
-        run_success = input("Would you like to try and run - r or attack - a:>")
+        run_success = input("Would you like to try and run - r or attack - a e - exit:>")
         if run_success == "r":
             print("Yay, we got away. That was close.")
             run1 = False
         elif run_success == "a":
             print("Please input r, which stands for run, for this one.")
+        elif run_success == "e":
+            print("exit tutorial")
+            return
         else:
             print("Make sure you only have the r, nothing else.")
     walk = True
@@ -77,11 +86,14 @@ def tutorial(name):
     print("Let's run again.")
     run2 = True
     while run2:
-        run_fail = input("Would you like to try and run - r or attack - a:>")
+        run_fail = input("Would you like to try and run - r or attack - a e - exit:>")
         if run_fail == "r":
             run2 = False
         elif run_fail == "a":
             print("Please input r, which stands for run, for this one.")
+        elif run_fail == "e":
+            print("exiting tutorial")
+            return
         else:
             print("Make sure you only have the r, nothing else.")
     print("Dang, we couldn't get away this time.")
@@ -89,7 +101,7 @@ def tutorial(name):
     print("I'm mad. Let's fight this.")
     attackVar = True
     while attackVar:
-        attack = input("Would you like to attack or run away? a - attack, r - run:>")
+        attack = input("Would you like to attack or run away? a - attack, r - run e - exit:>")
         if attack == "a":
             print("You do 150 damage and defeat the Yokai.")
             print("You gain 50 coins.")
@@ -97,6 +109,9 @@ def tutorial(name):
             attackVar = False
         elif attack == "r":
             print("Please select a for attack.")
+        elif attack == "e":
+            print("shuting down tutorial")
+            return
         else:
             print("Make sure you only input a, nothing else.")
     print("Hey, 50 coins, that's cool. Anyway, let's continue.")
@@ -115,7 +130,7 @@ def tutorial(name):
     print("I'm feeling confident this time. Let's fight instead of running.")
     fight = True
     while fight:
-        fightPrompt = input("Would you like to attack or run away? a - attack, r - run:>")
+        fightPrompt = input("Would you like to attack or run away? a - attack, r - run e - exit:>")
         if fightPrompt == "a":
             print("You do 150 damage and defeat the Yokai.")
             print("You gain 50 coins.")
@@ -123,6 +138,9 @@ def tutorial(name):
             fight = False
         elif fightPrompt == "r":
             print("Please select a for attack.")
+        elif fightPrompt == "e":
+            print("shuting down tutorial")
+            return
         else:
             print("Make sure you only input a, nothing else.")
     print("And finally, we made it. We saved the person. Let's go home.")
