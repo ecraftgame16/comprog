@@ -89,6 +89,7 @@ def main_game():
             if action == "w":
                 walked_times += 1
                 attack = random.randint(1, 3)
+                shop_true = random.randint(1, 50)
                 if attack == 2 and do_combat == True:  # if the number selected is 2 starts the attack option and combat is not dissabled from dev commands
                     attacker = random.choice(setting.lEnemies)  # selects the enemy
                     print(f"oh no a foe has appeared it is a {attacker} here is a description")  # describes the enemy
@@ -111,6 +112,15 @@ def main_game():
                                 money = attack_enemy_first(attacker, money, extra_attack, defense)
                         else:
                             print("make sure you use a for attack and r for run")
+                if shop_true == 8:
+                    indeciveness = True
+                    if indecisive:
+                        shop_q = input("would you like to go to the shop? y/n:>")
+                        if shop_q == "y":
+                            inventory, money = shop(inventory, money)
+                        elif shop_q == "n":
+                            print("you continue on")
+                        
             elif action == "i":  # runs inventory check
                 defense, extra_attack = inventory_manegment(inventory, money, extra_attack, defense, attack_equiped, defense_equiped, equiped_item_attack, equiped_item_defense)
             elif action == "dc":
