@@ -114,12 +114,16 @@ def main_game():
                             print("make sure you use a for attack and r for run")
                 if shop_true == 8:
                     indeciveness = True
-                    if indecisive:
+                    if indeciveness:
                         shop_q = input("would you like to go to the shop? y/n:>")
                         if shop_q == "y":
                             inventory, money = shop(inventory, money)
+                            indeciveness = False
                         elif shop_q == "n":
                             print("you continue on")
+                            indeciveness = False
+                        else:
+                            print("please ensure that you enter y for yes n for no and nothing ealse")
                         
             elif action == "i":  # runs inventory check
                 defense, extra_attack = inventory_manegment(inventory, money, extra_attack, defense, attack_equiped, defense_equiped, equiped_item_attack, equiped_item_defense)
