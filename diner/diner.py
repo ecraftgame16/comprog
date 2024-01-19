@@ -1,4 +1,0 @@
-#welcome message
-
-#list menue
-
