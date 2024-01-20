@@ -170,7 +170,8 @@ def drinks_menu(total_price):
             order_num = int(input("which drink would you like to order (please use the number next to your drink):>"))
         except ValueError:
             print(f"Input Error: please ensure that you enter a number 1-{len(english_menu.ldrinks)} ")
-            return total_price, menu_item
+            # return total_price, menu_item
+            exit()
         if 0 < order_num <= len(english_menu.ldrinks):
             menu_num = order_num - 1
             menu_item = english_menu.ldrinks[menu_num]
@@ -191,7 +192,34 @@ def drinks_menu(total_price):
     elif order == "n":
         return total_price, menu_item
 
-def end(total_price):
-    # print("allright hear is your bill")
-    # print
+def end(total_price, orderd_items):
+    print("allright hear is your bill")
+    print("hear is your itdiomised bill")
+    print(f"hear is what you orderd {orderd_items}")
+    print(f"hear is your total price {total_price}")
+    while True:
+        try:
+            payment_method = int(input("how would you like to pay card or cash? 1 for cash 2 for card:>"))
+            break
+        except ValueError:
+            print("Imput Error: please ensure that you only imput 1 for cash 2 for card")
+            continue
+    while True:
+        if payment_method == 1:
+            tip_question = input("would you like to tip?y/n:>")
+            if tip_question == "y":
+                amount = int(input("how much would you like to tip?")) 
+                print(f"""you leave the diner when a waiter starts to chase you down with the tip you left
+                          he catches up to you and tells you, you overpayed sir hear is your change
+                          you take your change back in amount of {amount}""")
+            elif tip_question == "n":
+                print("you pay and leave")
+        elif payment_method == 2:
+            if tip_question == "y":
+                amount = int(input("how much would you like to tip?"))    
+                print("""you wave down the waiter saying there is no option to tip
+                         the waiter calmly informs you that in japan tiping is not 
+                         common and to some is considerd rude""")
+            elif tip_question == "n":
+                print("you pay and leave")
     exit()#still in development will be made latter
