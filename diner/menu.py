@@ -41,6 +41,7 @@ class english_menu:
             "price": 2137
         }
     }
+    lentree = list(entree)
 
     sides = {
         "Edamame": {
@@ -84,6 +85,7 @@ class english_menu:
             "price": 560
         },
     }
+    lsides = list(sides)
 
     desserts = {
         "Mochi": {
@@ -127,6 +129,7 @@ class english_menu:
             "price": 350
         },
     }
+    ldesserts = list(desserts)
     drinks = {
         "Green Tea (Matcha or Sencha)": {
             "description": "raditional Japanese green tea, which can be served either as matcha (a finely ground, powdered green tea) or sencha (a type of loose leaf green tea). Both are known for their health benefits and refreshing taste.",
@@ -149,7 +152,7 @@ class english_menu:
             "price":600
         },
     }
-
+    ldrinks = list(drinks)
 class japanese_menu:
     entrees = {
     "寿司と刺身": {
@@ -193,6 +196,7 @@ class japanese_menu:
         "価格": 2087
     }
     }
+    lentrees = list(entrees)
 
     sides = {
         "枝豆": {
@@ -236,6 +240,7 @@ class japanese_menu:
             "価格": 510
         }
     }
+    lsides = list(sides)
 
     desserts = {
         "餅（もち）": {
@@ -279,6 +284,7 @@ class japanese_menu:
             "価格": 300
         }
     }
+    ldesserts = list(desserts)
 
     drinks = {
     "緑茶（抹茶または煎茶）": {
@@ -302,3 +308,4 @@ class japanese_menu:
         "価格": 550
     }
     }
+    ldrinks = list(drinks)
