@@ -428,7 +428,7 @@ def drinks_menu(total_price):
             print("Please ensure you use 'y' for yes or 'n' for no.")
 
 
-def end(total_price, orderd_items, great_man, language_selection):
+def end(total_price, ordered_items, great_man, language_selection):
     """
     This function presents the user with an itemized bill, showing each ordered item and its individual price in yen. 
     It then displays the final total price of the meal. Although the option to tip is offered, the server will 
@@ -440,52 +440,64 @@ def end(total_price, orderd_items, great_man, language_selection):
     great_man (function): The function run at the start of the program, used for looping.
     language_selection (function): Called after great_man because great_man returns this function.
     """
-    #prints the acctual bill to the terminal
-    print("allright hear is your bill")
-    print("hear is your itdiomised bill")
-    print(f"hear is what you orderd {orderd_items}")
-    print(f"hear is your total price {total_price}")
+    # Print the itemized bill and total price to the terminal
+    print("Alright, here is your bill")
+    print("Here is your itemized bill")
+    print(f"Here is what you ordered {ordered_items}")
+    print(f"Here is your total price {total_price}")
+
+    # Loop to handle payment method selection
     while True:
         try:
-            #ussing numbers askes for the payment methed ensuring they 
-            payment_method = int(input("how would you like to pay card or cash? 1 for cash 2 for card:>"))
-            #makes sure it is a valid payment method
+            # Prompt user for payment method, ensuring input is a number
+            payment_method = int(input("How would you like to pay, card or cash? 1 for cash, 2 for card:>"))
+            # Validate payment method choice
             if payment_method == 1 or payment_method == 2:
                 break
             else:
-                print("please ensure you only use 1 for cash and 2 for card")
+                print("Please ensure you only use 1 for cash and 2 for card")
                 continue
         except ValueError:
-            print("Imput Error: please ensure that you only imput 1 for cash 2 for card")
+            print("Input Error: Please ensure that you only input 1 for cash, 2 for card")
             continue
+
+    # Loop to handle tipping decision based on payment method
     while True:
-        #cheacks payment method
+        # Check payment method
         if payment_method == 1:
-            tip_question = input("would you like to tip?y/n:>")
+            tip_question = input("Would you like to tip? y/n:>")
             if tip_question == "y":
-                #if cash asks how much to pay does not happen for card
+                # Handle cash payment and tip amount
                 try:
-                    #makes sure it is actualy an int  
-                    amount = int(input("how much would you like to tip?")) 
+                    # Ensure tip amount is a valid integer
+                    amount = int(input("How much would you like to tip?")) 
                 except ValueError:
-                    print("please ensure you use numbers and nothing ealse")
+                    print("Please ensure you use numbers and nothing else")
                     continue
-                print(f"""you leave the diner when a waiter starts to chase you down with the tip you left
-                          he catches up to you and tells you, you overpayed sir hear is your change
-                          you take your change back in amount of {amount}""")
+                # Describe cultural practice regarding tipping in Japan
+                print(f"""You leave the diner when a waiter starts to chase you down with the tip you left.
+                          He catches up to you and tells you, 'You overpaid, sir. Here is your change.'
+                          You take your change back in the amount of {amount}.""")
+                time.sleep(8)
                 break
             elif tip_question == "n":
-                print("you pay and leave")
+                print("You pay and leave.")
                 break
         elif payment_method == 2:
             if tip_question == "y":
-                print("""you wave down the waiter saying there is no option to tip
-                         the waiter calmly informs you that in japan tiping is not 
-                         common and to some is considerd rude""")
+                # Describe cultural practice regarding tipping in Japan for card payments
+                print("""You wave down the waiter, saying there is no option to tip.
+                         The waiter calmly informs you that in Japan, tipping is not 
+                         common and, to some, is considered rude.""")
+                time.sleep(8)
                 break
             elif tip_question == "n":
-                print("you pay and leave")
+                print("You pay and leave.")
                 break
-    print(great_man()) #calls great man to restart the loop 
-    language_selection() #once returned it calls this to continue as if it was the first start
+
+    # Restart the loop by calling great_man and continue with language_selection
+    time.sleep(2)
+    print(great_man()) 
+    language_selection()
+
 

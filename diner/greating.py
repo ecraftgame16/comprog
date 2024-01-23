@@ -1,5 +1,6 @@
 import random
 import time
+import os
 from enlgish_interactions import english
 from japanese_interactions import japanese
 
@@ -7,6 +8,7 @@ from japanese_interactions import japanese
 greetings = ["good morning", "good afternoon", "good evening", "we are closed"]
 
 def great_man():
+    os.system('cls' if os.name == 'nt' else 'clear')
     input("please press enter to start")
     great = random.choice(greetings)
     if great == "good morning":
@@ -31,7 +33,6 @@ def great_man():
                  エラー: 挨拶が見つかりません。もう一度お試しください、またはカスタマーサービス（+81 562-788-6942) にお電話ください。 """)
         time.sleep(3)
         great_man()
-    language_selection
 
 def language_selection():
     while True:
@@ -62,3 +63,4 @@ def language_selection():
             )
 
 print(great_man())
+language_selection()
