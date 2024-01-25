@@ -82,7 +82,11 @@ class english_menu:
         },
         "Nasu Dengaku (Miso Glazed Eggplant)": {
             "description": "Eggplant slices broiled or grilled and topped with a sweet and savory miso glaze, often garnished with sesame seeds or green onions.",
-            "price": 560
+            "price": 560,
+        "rice" : {
+            "discription" : "A white graine tha typicaly acompays is a side to asain foods",
+            "price" : 400
+        }
         },
     }
     lsides = list(sides)
@@ -238,7 +242,12 @@ class japanese_menu:
         "茄子の田楽（味噌グレーズ）": {
             "description": "焼いたりグリルしたりしたナスのスライスに、甘辛い味噌ベースのグレーズをかけたもの。しばしばゴマやネギで飾られます。",
             "price": 510
-        }
+        },
+        "ライス" : {
+            "description" : "通常アジア料理の付け合わせとして提供される白い穀物",
+            "price" : 400
+}
+
     }
     lsides = list(sides)
 
