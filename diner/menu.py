@@ -84,7 +84,7 @@ class english_menu:
             "description": "Eggplant slices broiled or grilled and topped with a sweet and savory miso glaze, often garnished with sesame seeds or green onions.",
             "price": 560,
         "rice" : {
-            "discription" : "A white graine tha typicaly acompays is a side to asain foods",
+            "discription" : "A white graine that typicaly acompays is a side to asain foods",
             "price" : 400
         }
         },
