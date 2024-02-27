@@ -1,3 +1,5 @@
+// and or not
+// &&  ||  !
 // // variabls
 
 // const firstName = "Jerry" // constant unchangable
