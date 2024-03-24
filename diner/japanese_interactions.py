@@ -1,10 +1,10 @@
 import time
-from menu import *
+from menu import japanese_menu
 def japanese(great_man, language_selection):
     """
     This function initiates the restaurant ordering process in Japanese. It welcomes the user and guides them
     to their virtual table. After a brief pause, it proceeds to the menu selection phase, allowing the user
-    to interact with the menu in Japanese.
+    to interact with the menu in Japanese.a
 
     Parameters:
     great_man (function): A function reference that displays the initial greeting message.
