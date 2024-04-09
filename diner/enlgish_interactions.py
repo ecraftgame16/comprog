@@ -1,5 +1,5 @@
-from menu import *
 import time
+from menu import english_menu
 def english(great_man, language_selection):
     print ("follow me to your table")
     time.sleep(2)
