@@ -500,7 +500,7 @@ def selling_your_items(inventory, money):
         print("item not in inventory")
         return inventory, money
 
-def buying_items(inventory, money, healing_gen, attack_gen,defense_gen,decoration_gen):
+def buying_items(inventory, money, healing_gen, attack_gen vbnen,defense_gen,decoration_gen):
     print(""" Shopkeeper:
                         I see you would like to buy something.""")
     print (f"attack type {attack_gen}")
