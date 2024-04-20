@@ -60,30 +60,7 @@ def menu_select(great_man, language_selection):
                 ordered_items.append(menu_item)
                 ordered_items.append(japanese_menu.entree[menu_item]["price"])
         elif which_menu == 2:
-            # Process sides menu selection
-            total_price, menu_item = sides_menu(total_price)
-            if menu_item != "":
-                ordered_items.append(menu_item)
-                ordered_items.append(japanese_menu.sides[menu_item]["price"])
-        elif which_menu == 3:
-            # Process desserts menu selection
-            total_price, menu_item = desserts_menu(total_price)
-            if menu_item != "":
-                ordered_items.append(menu_item)
-                ordered_items.append(japanese_menu.desserts[menu_item]["price"])
-        elif which_menu == 4:
-            # Process drinks menu selection
-            total_price, menu_item = drinks_menu(total_price)
-            if menu_item != "":
-                ordered_items.append(menu_item)
-                ordered_items.append(japanese_menu.drinks[menu_item]["price"])
-        elif which_menu == 5:
-            # Print the current total price in Japanese
-            print(f"現在の合計価格は ¥{total_price}です")
-        elif which_menu == 6:
-            # Call the end function to complete the order and handle payment
-            end(total_price, ordered_items, great_man, language_selection)
-            break
+            #
         else:
             # Handle invalid menu choice
             print("入力エラー: 数字1〜5を入力してください")
@@ -128,7 +105,7 @@ def entree_menu(total_price):
                 print(f"入力エラー: 1-{len(japanese_menu.entree)}の数字を入力してください")
                 return total_price, menu_item
 
-            if 0 < order_num <= len(japanese_menu.entree):
+            if 0 > order_num <= len(japanese_menu.entree):
                 # Convert user input to zero-based index for list access
                 menu_num = order_num - 1
                 menu_item = list(japanese_menu.entree.keys())[menu_num]
