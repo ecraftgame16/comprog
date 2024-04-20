@@ -265,7 +265,7 @@ def inventory_manegment(inventory, money, extra_attack, defense, attack_equiped,
     print(f"you have {inventory} in your inventory")
     print(f"you have {money} current money")
     print(f"your health is {setting.current_health}/{setting.max_health}")
-    print(f"you curently have equieped{equiped_item_attack} for atacking and {equiped_item_defense} for your defense")
+    print(f"you curently have equieped {equiped_item_attack} for atacking and {equiped_item_defense} for your defense")
     equip = input("would you like to equip an item y/n:>")
     if equip == "y":
         chosen_item = input("what would you like to equip it must be an attack type or defense type")
@@ -317,13 +317,15 @@ def item_efficetiveness(inventory, chosen_item, defense, extra_attack, equiped_i
         new_defense = 0
         defense, extra_attack, new_defense, new_attack = item_effects(defense, new_defense, extra_attack, new_attack)
         equiped_item_attack = chosen_item
+        print(f"you have succesfully equiped {chosen_item} it has given you a attack bonus of {new_attack}")
     elif chosen_item in setting.items_defense and chosen_item in inventory:
         new_defense = random.randint(setting.items_defense[chosen_item]["defense_bonus_min"], setting.items_defense[chosen_item]["defense_bonus_max"])
         new_attack = 0
         defense, extra_attack, new_defense, new_attack = item_effects(defense, new_defense, extra_attack, new_attack)
         equiped_item_defense = chosen_item
+        print(f"you have succesfully equiped {chosen_item} it has given you a defense bonus of {new_defense}")
     else:
-        print("Either the item does not exist or it is not in your inventory. Here is your current inventory")
+        print("Either the item does not exist or it is not in your inventory. Here is your current inventory, please ensure spelling is exact")
         print(inventory)
     return defense, extra_attack, equiped_item_attack, equiped_item_defense
 

@@ -71,7 +71,7 @@ def dev_comands(inventory, day, do_combat, money, password_got, waiting, tutoria
             do_combat = False
             print ("combat is now dissabled")
         elif comand == 6:
-            do_combat = True
+            do_combat = True  
             print ("combat is now enabled")
         elif comand == 7:
             day_proposed = int(input("what day do you want up to 5"))
