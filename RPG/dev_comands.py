@@ -38,9 +38,10 @@ def dev_comands(inventory, day, do_combat, money, password_got, waiting, tutoria
                 setting.max_health = int(input("what would you like the max health to be:>"))
             except ValueError:
                 print("please insert a integer nothing ealse")
-            max_current = input("would you like to set current health to the new max health y/n:>")
-            if max_current == "y":
-                setting.current_health = setting.max_health
+            else:
+                max_current = input("would you like to set current health to the new max health y/n:>")
+                if max_current == "y":
+                    setting.current_health = setting.max_health
         elif comand == 4:
             print(f"current inventory = {inventory}")
             inventory_edit = True

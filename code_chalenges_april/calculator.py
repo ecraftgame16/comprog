@@ -67,7 +67,7 @@ while True:
             num1 =int(input("what would you like the first number be:>"))
             num2 =int(input("what would you like the second number to be:>"))
     except ValueError:
-        print("PUT ONLY NUMBERS NO SPACE NO DASH NO DECIMLS, im not mad im just disapointed")
+        print("PUT ONLY NUMBERS NO SPACE NO DASH NO DECIMLS AND MAKE SURE IT IS 1-6, im not mad im just disapointed")
         continue
     else:
         print(introduction(num1, num2, operator))
