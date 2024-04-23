@@ -5,7 +5,8 @@ def exponent(base, power):
         return 1
     elif power < 0:
         return "i dont get payed enough for this"
-    return base ** power
+    else:
+        return base ** power
 
 base = int(input ("what is the base"))
 power = int(input("what is the power"))
