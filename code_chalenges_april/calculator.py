@@ -27,10 +27,14 @@ def multiply(num1, num2):
 def divide(num1, num2):
     while True:    
         anser = input("do you want to have a more percice anser (decimal place) or a simpliler anser (no decimal place) p = percice or s = simple:>")
-        if anser == "p":
-            return (num1/num2)
-        elif anser == "s":
-            return (num1//num2)
+        try:    
+            if anser == "p":
+                return (num1/num2)
+            elif anser == "s":
+                return (num1//num2)
+        except ZeroDivisionError:
+            return("are you kiding me dumby")
+
 def exponent(num1, num2):
     if num2 == 1:
         return(num1)

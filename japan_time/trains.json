@@ -1,0 +1,22 @@
+{
+    "Aplha 1-1": {
+        "operator_name": "cat",
+        "employee_number": "0",
+        "current_route": "none",
+        "is_active": false,
+        "current_stop": "",
+        "current_conductor": "none",
+        "crew_active_duration": "0",
+        "is_on_time": true
+    },
+    "echo 1-1": {
+        "operator_name": "etn",
+        "employee_number": "1",
+        "current_route": "okanowa",
+        "is_active": false,
+        "current_stop": "n/a",
+        "current_conductor": "victoooooor",
+        "crew_active_duration": "0",
+        "is_on_time": false
+    }
+}
