@@ -1,2 +1,4 @@
-while True:
-    print ("barret-san baka desu")
+try:
+    raise ValueError
+except ValueError:
+    print("most efficent")
